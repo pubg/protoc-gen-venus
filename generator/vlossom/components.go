@@ -72,3 +72,11 @@ type DateTimePicker struct {
 func NewDateTimePicker(options BaseComponentOptions) *DateTimePicker {
 	return &DateTimePicker{BaseComponent: NewBaseComponent("vn-date-time-picker", options)}
 }
+
+type JsonEditor struct {
+	BaseComponent `json:",inline"`
+}
+
+func NewJsonEditor(options BaseComponentOptions) *JsonEditor {
+	return &JsonEditor{BaseComponent: NewBaseComponent("vn-json-editor", options)}
+}

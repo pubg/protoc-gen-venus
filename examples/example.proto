@@ -12,6 +12,7 @@ message FirstForm {
   string name = 1 [(protoc.gen.vlossom.field_options).expose = true];
   SecondMessage second_message = 2 [(protoc.gen.vlossom.field_options).expose = true];
   MyEnum my_enum = 3;
+  map<string, string> mymap = 4;
 }
 
 message SecondMessage {

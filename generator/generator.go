@@ -90,7 +90,16 @@ func (g *VlossomGenerator) buildFormFromMessage(message *protogen.Message, paren
 			}
 			components = append(components, nestedComponents...)
 
-		} else if fd.Kind() == protoreflect.MessageKind {
+		} else if fd.Kind() == protoreflect.MessageKind && fd.IsMap() {
+			// map은 repeated entry<key, value>와 동일하다.
+			// map 일 때 repeated 적용 필요없음
+			component, err := g.buildFromMapField(field, vlossom.BaseComponentOptions{})
+			if err != nil {
+				return nil, err
+			}
+			components = append(components, component)
+
+		} else if fd.Kind() == protoreflect.MessageKind && !fd.IsMap() {
 			nestedComponents, err := g.buildFormFromMessage(field.Message, exposeField)
 			if err != nil {
 				return nil, err
@@ -231,6 +240,10 @@ func (g *VlossomGenerator) buildFromBooleanField(field *protogen.Field, componen
 		return vlossom.NewCheckbox(componentOptions), nil
 	}
 	return nil, fmt.Errorf("failed buildFromBooleanField, unknown component type: %s", componentType)
+}
+
+func (g *VlossomGenerator) buildFromMapField(field *protogen.Field, componentOptions vlossom.BaseComponentOptions) (vlossom.Component, error) {
+	return vlossom.NewJsonEditor(componentOptions), nil
 }
 
 func (g *VlossomGenerator) generate(components []vlossom.Component) ([]byte, error) {
