@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package schema;
+
+import "options.proto";
+
+option go_package = "github.com/vlossom/protoc-gen-vlossom/example/schema";
+
+option (protoc.gen.vlossom.file_options) = {expose: true};
+
+message FirstForm {
+  string name = 1 [(protoc.gen.vlossom.field_options).expose = true];
+  SecondMessage second_message = 2 [(protoc.gen.vlossom.field_options).expose = true];
+  MyEnum my_enum = 3;
+}
+
+message SecondMessage {
+  option (protoc.gen.vlossom.message_options).expose = true;
+  string a = 1 [(protoc.gen.vlossom.field_options).label = "AAAAAAAA"];
+  string b = 2 [(protoc.gen.vlossom.field_options) = {placeholder: "Input B", label: "BBBBBBBB"}];
+}
+
+enum MyEnum {
+  FOO = 0;
+  BAR = 1;
+  BAZ = 2;
+}

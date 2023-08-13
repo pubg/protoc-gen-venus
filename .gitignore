@@ -19,3 +19,9 @@
 
 # Go workspace file
 go.work
+
+.idea/
+examples/protoc-gen-vlossom
+examples/input.dump
+examples/example.vlossom.json
+**/request.pb.bin
