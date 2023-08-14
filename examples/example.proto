@@ -6,7 +6,11 @@ import "options.proto";
 
 option go_package = "github.com/vlossom/protoc-gen-vlossom/example/schema";
 
-option (protoc.gen.vlossom.file_options) = {expose: true};
+option (protoc.gen.vlossom.file_options) = {expose: true, entrypointMessage: "Values"};
+
+message Values {
+  FirstForm first = 1;
+}
 
 message FirstForm {
   string name = 1 [(protoc.gen.vlossom.field_options).expose = true];

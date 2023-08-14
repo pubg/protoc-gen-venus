@@ -5,26 +5,29 @@ option go_package = "protoc-gen-vlossom/generator";
 
 import "google/protobuf/descriptor.proto";
 
-// Not extendable, just define options
+// Not extendable, just define structure
 message PluginOptions {
   optional bool exposeAll = 1;
+  optional string outputFileSuffix = 2;
 }
 
 message FileOptions {
-  bool expose = 1;
+  optional bool expose = 1;
+  string entrypointMessage = 2;
 }
 
 message MessageOptions {
-  bool expose = 1;
-  int32 lg = 2;
+  optional bool expose = 1;
+  string property = 2;
 }
 
 message FieldOptions {
-  bool expose = 1;
-  int32 lg = 2;
-  string label = 3;
-  string placeholder = 4;
-  ComponentType component = 5;
+  optional bool expose = 1;
+  string property = 2;
+  int32 lg = 3;
+  string label = 4;
+  string placeholder = 5;
+  ComponentType component = 6;
 
   StringOptions string = 10;
   NumberOptions number = 11;
@@ -50,6 +53,7 @@ enum ComponentType {
   RadioSet = 5;
   DateRangePicker = 6;
   DateTimePicker = 7;
+  JsonEditor = 8;
 }
 
 message EnumOptions {

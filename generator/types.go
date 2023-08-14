@@ -1,6 +1,11 @@
 package generator
 
-import "google.golang.org/protobuf/reflect/protoreflect"
+import (
+	"fmt"
+	"strings"
+
+	"google.golang.org/protobuf/reflect/protoreflect"
+)
 
 type ScalaKind struct {
 	kind             string
@@ -24,10 +29,14 @@ var (
 		kind:             "enum",
 		defaultComponent: ComponentType_Select,
 	}
+	JsonKind = ScalaKind{
+		kind:             "map",
+		defaultComponent: ComponentType_JsonEditor,
+	}
 )
 
-func ToScalaKind(kind protoreflect.Kind) ScalaKind {
-	switch kind {
+func ToScalaKind(fieldDescriptor protoreflect.FieldDescriptor) ScalaKind {
+	switch fieldDescriptor.Kind() {
 	case protoreflect.BoolKind:
 		return BooleanKind
 	case protoreflect.EnumKind:
@@ -61,9 +70,61 @@ func ToScalaKind(kind protoreflect.Kind) ScalaKind {
 	case protoreflect.BytesKind:
 		return StringKind
 	case protoreflect.MessageKind:
-		panic("GroupKind is not supported")
+		if fieldDescriptor.IsMap() {
+			return JsonKind
+		}
+		panic("MessageKind is not supported")
 	case protoreflect.GroupKind:
 		panic("GroupKind is not supported")
 	}
-	return StringKind
+	panic(fmt.Sprintf("%s is not supported", fieldDescriptor.FullName()))
+}
+
+type HierarchicalContext struct {
+	exposes    []bool
+	properties []string
+}
+
+func (c *HierarchicalContext) AppendExpose(expose *bool) {
+	if expose != nil {
+		c.exposes = append(c.exposes, *expose)
+	}
+}
+
+func (c *HierarchicalContext) Expose() bool {
+	if len(c.exposes) == 0 {
+		return false
+	}
+	for _, expose := range c.exposes {
+		if !expose {
+			return false
+		}
+	}
+	return true
+}
+
+func (c *HierarchicalContext) AppendProperty(property string) {
+	c.properties = append(c.properties, property)
+}
+
+func (c *HierarchicalContext) AppendPropertyName(name protoreflect.Name) {
+	c.properties = append(c.properties, string(name))
+}
+
+func (c *HierarchicalContext) PropertiesString() string {
+	return strings.Join(c.properties, ".")
+}
+
+func NewFromHierarchicalContext(src *HierarchicalContext) *HierarchicalContext {
+	dst := &HierarchicalContext{
+		exposes:    make([]bool, len(src.exposes)),
+		properties: make([]string, len(src.properties)),
+	}
+	copy(dst.exposes, src.exposes)
+	copy(dst.properties, src.properties)
+	return dst
+}
+
+func NewHierarchicalContext() *HierarchicalContext {
+	return &HierarchicalContext{}
 }

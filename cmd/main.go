@@ -15,7 +15,8 @@ func main() {
 	}
 
 	conf := &generator.PluginOptions{
-		ExposeAll: flags.Bool("expose_all", false, `expose all fields, By default, only fields annotated with 'expose' are exposed.`),
+		ExposeAll:        flags.Bool("expose_all", false, `expose all fields, By default, only fields annotated with 'expose' are exposed.`),
+		OutputFileSuffix: flags.String("output_file_suffix", ".vlossom.json", `output file suffix.`),
 	}
 
 	opts.Run(func(plugin *protogen.Plugin) error {
