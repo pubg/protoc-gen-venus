@@ -88,7 +88,7 @@ func (ComponentType) EnumDescriptor() ([]byte, []int) {
 	return file_options_proto_rawDescGZIP(), []int{0}
 }
 
-// Not extendable, just define options
+// Not extendable, just define structure
 type PluginOptions struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

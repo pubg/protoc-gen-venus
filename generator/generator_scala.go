@@ -57,8 +57,8 @@ func (g *VlossomGenerator) buildFromNumberField(field *protogen.Field, component
 	switch componentType {
 	case ComponentType_Input:
 		var max *int
-		if fo.GetString_().Max != nil {
-			i := int(*fo.GetString_().Max)
+		if fo != nil && fo.Number != nil && fo.Number.Max != nil {
+			i := int(*fo.Number.Max)
 			max = &i
 		}
 		return vlossom.NewInput(componentOptions, max), nil

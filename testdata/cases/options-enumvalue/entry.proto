@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package tests;
+
+import "options.proto";
+
+option go_package = "github.com/sample";
+
+option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values",  expose: true};
+
+message Values {
+  Enum value = 1;
+}
+
+enum Enum {
+  UNKNOWN = 0 [(protoc.gen.vlossom.enum_value_options) = {string: "unknown"}];
+  VALUE1 = 1  [(protoc.gen.vlossom.enum_value_options) = {integer: 1}];
+  VALUE2 = 2 [(protoc.gen.vlossom.enum_value_options) = {integer: 2}];
+  VALUE3 = 3 [(protoc.gen.vlossom.enum_value_options) = {float: 3.5}];
+  VALUE4 = 4;
+  VALUE5 = 5;
+  VALUE6 = 6;
+  VALUE7 = 7;
+  VALUE8 = 8;
+  VALUE9 = 9;
+}

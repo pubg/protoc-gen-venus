@@ -8,9 +8,6 @@ import (
 // GetFileOptions null을 반환할 수 있지만, null 이라도 리시버 호출 됨
 func GetFileOptions(desc protoreflect.Descriptor) *FileOptions {
 	options := desc.Options()
-	if options == nil {
-		return nil
-	}
 	if !proto.HasExtension(options, E_FileOptions) {
 		return nil
 	}
@@ -19,9 +16,6 @@ func GetFileOptions(desc protoreflect.Descriptor) *FileOptions {
 
 func GetMessageOptions(desc protoreflect.Descriptor) *MessageOptions {
 	options := desc.Options()
-	if options == nil {
-		return nil
-	}
 	if !proto.HasExtension(options, E_MessageOptions) {
 		return nil
 	}
@@ -30,9 +24,6 @@ func GetMessageOptions(desc protoreflect.Descriptor) *MessageOptions {
 
 func GetFieldOptions(desc protoreflect.Descriptor) *FieldOptions {
 	options := desc.Options()
-	if options == nil {
-		return nil
-	}
 	if !proto.HasExtension(options, E_FieldOptions) {
 		return nil
 	}
@@ -41,9 +32,6 @@ func GetFieldOptions(desc protoreflect.Descriptor) *FieldOptions {
 
 func GetEnumOptions(desc protoreflect.Descriptor) *EnumOptions {
 	options := desc.Options()
-	if options == nil {
-		return nil
-	}
 	if !proto.HasExtension(options, E_EnumOptions) {
 		return nil
 	}
@@ -52,10 +40,7 @@ func GetEnumOptions(desc protoreflect.Descriptor) *EnumOptions {
 
 func GetEnumValueOptions(desc protoreflect.Descriptor) *EnumValueOptions {
 	options := desc.Options()
-	if options == nil {
-		return nil
-	}
-	if !proto.HasExtension(options, E_EnumOptions) {
+	if !proto.HasExtension(options, E_EnumValueOptions) {
 		return nil
 	}
 	return proto.GetExtension(options, E_EnumValueOptions).(*EnumValueOptions)

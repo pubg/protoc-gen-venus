@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package tests;
+
+import "options.proto";
+
+option go_package = "github.com/sample";
+
+option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values", expose: true};
+
+message Values {
+  int32 value1 = 1;
+  string value2 = 2;
+  bool value3 = 3;
+  float value4 = 4;
+  double value5 = 5;
+  Values2 value6 = 6;
+}
+
+message Values2 {
+  int32 value1 = 1;
+  string value2 = 2;
+  bool value3 = 3;
+  float value4 = 4;
+  double value5 = 5;
+}

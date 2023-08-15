@@ -1,5 +1,18 @@
 # protoc-gen-vlossom
 
+[Vlossom](https://git.projectbro.com/dev2_tool/venus)의 Dynamic Form을 만드는 proto plugin
+
+## Getting Started
+1. 원하는 디렉토리에 proto/options.proto와 example.proto를 만듭니다. 
+
+#### Workdir 상태
+```
+options.proto
+example.proto
+```
+
+2. example.proto에 아래 내용을 채웁니다.
+
 ## Protobuf AST
 ![ast](./ast.png)
 

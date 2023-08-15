@@ -41,6 +41,10 @@ func (g *VlossomGenerator) Run() error {
 			return err
 		}
 
+		if len(buf) == 0 {
+			continue
+		}
+
 		outputFile := g.plugin.NewGeneratedFile(generateFileName(file, *g.options.OutputFileSuffix), "")
 		_, err = outputFile.Write(buf)
 		if err != nil {
@@ -133,7 +137,7 @@ func generateToJson(components []vlossom.Component) ([]byte, error) {
 	for _, component := range components {
 		transformed = append(transformed, []vlossom.Component{component})
 	}
-	return json.Marshal(transformed)
+	return json.MarshalIndent(transformed, "", "  ")
 }
 
 func generateFileName(file *protogen.File, suffix string) string {
