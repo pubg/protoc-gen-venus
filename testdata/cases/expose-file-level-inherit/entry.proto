@@ -6,7 +6,7 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values", expose: true};
+option (pubg.vlossom.file) = {entrypointMessage: "Values", expose: true};
 
 message Values {
   int32 value1 = 1;

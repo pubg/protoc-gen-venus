@@ -6,23 +6,23 @@ import "options.proto";
 
 option go_package = "github.com/vlossom/protoc-gen-vlossom/example/schema";
 
-option (protoc.gen.vlossom.file_options) = {expose: true, entrypointMessage: "Values"};
+option (pubg.vlossom.file) = {expose: true, entrypointMessage: "Values"};
 
 message Values {
   FirstForm first = 1;
 }
 
 message FirstForm {
-  string name = 1 [(protoc.gen.vlossom.field_options) = {component: Input, input: {type: text, max: 10}}];
-  SecondMessage second_message = 2 [(protoc.gen.vlossom.field_options).expose = true];
+  string name = 1 [(pubg.vlossom.field) = {component: Input, input: {type: text, max: 10}}];
+  SecondMessage second_message = 2 [(pubg.vlossom.field).expose = true];
   MyEnum my_enum = 3;
   map<string, string> mymap = 4;
 }
 
 message SecondMessage {
-  option (protoc.gen.vlossom.message_options).expose = true;
-  string a = 1 [(protoc.gen.vlossom.field_options).label = "AAAAAAAA"];
-  string b = 2 [(protoc.gen.vlossom.field_options) = {placeholder: "Input B", label: "BBBBBBBB"}];
+  option (pubg.vlossom.message).expose = true;
+  string a = 1 [(pubg.vlossom.field).label = "AAAAAAAA"];
+  string b = 2 [(pubg.vlossom.field) = {placeholder: "Input B", label: "BBBBBBBB"}];
 }
 
 enum MyEnum {

@@ -6,14 +6,14 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values", expose: true};
+option (pubg.vlossom.file) = {entrypointMessage: "Values", expose: true};
 
 message Values {
   // Default Options
-  string value1 = 1 [(protoc.gen.vlossom.field_options) = {component:Inference}];
+  string value1 = 1 [(pubg.vlossom.field) = {component:Inference}];
 
   // Component: Input
-  string value2 = 2 [(protoc.gen.vlossom.field_options) = {
+  string value2 = 2 [(pubg.vlossom.field) = {
     component:Input,
     input: {
       min: 1,
@@ -23,7 +23,7 @@ message Values {
   }];
 
   // Component: Select Simple
-  string value3 = 3 [(protoc.gen.vlossom.field_options) = {
+  string value3 = 3 [(pubg.vlossom.field) = {
     component:Select,
     select: {
       options: {
@@ -34,7 +34,7 @@ message Values {
   }];
 
   // Component: Select Labeled
-  string value4 = 4 [(protoc.gen.vlossom.field_options) = {
+  string value4 = 4 [(pubg.vlossom.field) = {
     component:Select,
     select: {
       options: {
@@ -45,7 +45,7 @@ message Values {
   }];
 
   // Component: RadioSet Simple
-  string value5 = 5 [(protoc.gen.vlossom.field_options) = {
+  string value5 = 5 [(pubg.vlossom.field) = {
     component:RadioSet,
     radio_set: {
       options: {
@@ -56,7 +56,7 @@ message Values {
   }];
 
   // Component: RadioSet Labeled
-  string value6 = 6 [(protoc.gen.vlossom.field_options) = {
+  string value6 = 6 [(pubg.vlossom.field) = {
     component:RadioSet,
     radio_set: {
       options: {
@@ -67,22 +67,22 @@ message Values {
   }];
 
   // Component: DataRangePicker
-  string value7 = 7 [(protoc.gen.vlossom.field_options) = {
+  string value7 = 7 [(pubg.vlossom.field) = {
     component:DateRangePicker,
   }];
 
   // Component: DataTimePicker
-  string value8 = 8 [(protoc.gen.vlossom.field_options) = {
+  string value8 = 8 [(pubg.vlossom.field) = {
     component:DateTimePicker,
   }];
 
   // Component: MultiString Default Options
-  string value9 = 9 [(protoc.gen.vlossom.field_options) = {
+  string value9 = 9 [(pubg.vlossom.field) = {
     component:MultiString,
   }];
 
   // Component: MultiString Many Options
-  string value10 = 10 [(protoc.gen.vlossom.field_options) = {
+  string value10 = 10 [(pubg.vlossom.field) = {
     component:MultiString,
     multi_string: {
       copy: true,
@@ -92,7 +92,7 @@ message Values {
   }];
 
   // Component: TextArea
-  string value11 = 11 [(protoc.gen.vlossom.field_options) = {
+  string value11 = 11 [(pubg.vlossom.field) = {
     component:TextArea,
     text_area: {
       max: 1000,
@@ -101,7 +101,7 @@ message Values {
   }];
 
   // Component: JsonEditor
-  string value12 = 12 [(protoc.gen.vlossom.field_options) = {
+  string value12 = 12 [(pubg.vlossom.field) = {
     component:JsonEditor,
     json_editor: {
       height: 1000,

@@ -6,20 +6,20 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values", expose: true};
+option (pubg.vlossom.file) = {entrypointMessage: "Values", expose: true};
 
 message Values {
   // 최소 옵션
-  repeated bool value1 = 1 [(protoc.gen.vlossom.field_options).checkboxSet.options = {simple_options: "a", simple_options: "b", simple_options: "c"}];
+  repeated bool value1 = 1 [(pubg.vlossom.field).checkboxSet.options = {simple_options: "a", simple_options: "b", simple_options: "c"}];
 
   // mandantory checkboxset type
-  repeated bool value2 = 2 [(protoc.gen.vlossom.field_options) = {component: CheckboxSet, checkboxSet: {options: {simple_options: "a", simple_options: "b", simple_options: "c"}}}];
+  repeated bool value2 = 2 [(pubg.vlossom.field) = {component: CheckboxSet, checkboxSet: {options: {simple_options: "a", simple_options: "b", simple_options: "c"}}}];
 
   // mandantory inference -> checkbox가 나와야 함
-  repeated bool value4 = 4 [(protoc.gen.vlossom.field_options) = {component: Inference, checkboxSet: {options: {simple_options: "a", simple_options: "b", simple_options: "c"}}}];
+  repeated bool value4 = 4 [(pubg.vlossom.field) = {component: Inference, checkboxSet: {options: {simple_options: "a", simple_options: "b", simple_options: "c"}}}];
 
   // labeledoptions
-  repeated bool value5 = 5 [(protoc.gen.vlossom.field_options).checkboxSet.options = {
+  repeated bool value5 = 5 [(pubg.vlossom.field).checkboxSet.options = {
     labeled_options: {label: "label1", string: "value1"},
     labeled_options: {label: "label2", string: "value2"},
     labeled_options: {label: "label3", string: "value3"},

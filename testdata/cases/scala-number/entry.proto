@@ -6,33 +6,33 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values", expose: true};
+option (pubg.vlossom.file) = {entrypointMessage: "Values", expose: true};
 
 message Values {
   // Full Options
-  int32 value1 = 1 [(protoc.gen.vlossom.field_options) = {input: {type: number, min: 1, max: 100}}];
+  int32 value1 = 1 [(pubg.vlossom.field) = {input: {type: number, min: 1, max: 100}}];
 
   // type 생략, type으로 number가 나와야 한다
-  int32 value2 = 2 [(protoc.gen.vlossom.field_options) = {}];
+  int32 value2 = 2 [(pubg.vlossom.field) = {}];
 
   // type inference 명시적 지정
-  int32 value3 = 3 [(protoc.gen.vlossom.field_options) = {input: {type:inference}}];
+  int32 value3 = 3 [(pubg.vlossom.field) = {input: {type:inference}}];
 
   // type 이상한거 지정, 일단은 에러 없이 나와야 한다.
   // 나중에 에러 뱉게 바꿀지도?
-  int32 value4 = 4 [(protoc.gen.vlossom.field_options) = {input: {type:text}}];
+  int32 value4 = 4 [(pubg.vlossom.field) = {input: {type:text}}];
 
   // min 0 지원
-  int32 value5 = 5 [(protoc.gen.vlossom.field_options) = {input: {min: 0}}];
+  int32 value5 = 5 [(pubg.vlossom.field) = {input: {min: 0}}];
 
   // max 0 지원
-  int32 value6 = 6 [(protoc.gen.vlossom.field_options) = {input: {max: 0}}];
+  int32 value6 = 6 [(pubg.vlossom.field) = {input: {max: 0}}];
 
   // min 0 아닌 값 지원
-  int32 value7 = 7 [(protoc.gen.vlossom.field_options) = {input: {min: 100}}];
+  int32 value7 = 7 [(pubg.vlossom.field) = {input: {min: 100}}];
 
   // max 0 아닌 값 지원
-  int32 value8 = 8 [(protoc.gen.vlossom.field_options) = {input: {max: 100}}];
+  int32 value8 = 8 [(pubg.vlossom.field) = {input: {max: 100}}];
 
   // int32 외의 모든 number types 지원
   // uint는 min 0으로 지정해야 하나?

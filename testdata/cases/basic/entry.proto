@@ -6,10 +6,10 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values"};
+option (pubg.vlossom.file) = {entrypointMessage: "Values"};
 
 message Values {
-  option (protoc.gen.vlossom.message_options) = {expose: true};
+  option (pubg.vlossom.message) = {expose: true};
 
   int32 value1 = 1;
   string value2 = 2;

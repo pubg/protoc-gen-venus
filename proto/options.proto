@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package protoc.gen.vlossom;
+package pubg.vlossom;
 option go_package = "protoc-gen-vlossom/generator/protooptions";
 
 import "google/protobuf/descriptor.proto";
@@ -151,21 +151,21 @@ message EnumValueOptions {
 }
 
 extend google.protobuf.FileOptions {
-  FileOptions file_options = 11241;
+  FileOptions file = 11241;
 }
 
 extend google.protobuf.FieldOptions {
-  FieldOptions field_options = 11242;
+  FieldOptions field = 11242;
 }
 
 extend google.protobuf.MessageOptions {
-  MessageOptions message_options = 11243;
+  MessageOptions message = 11243;
 }
 
 extend google.protobuf.EnumOptions {
-  EnumOptions enum_options = 11244;
+  EnumOptions enum = 11244;
 }
 
 extend google.protobuf.EnumValueOptions {
-  EnumValueOptions enum_value_options = 11245;
+  EnumValueOptions enum_value = 11245;
 }

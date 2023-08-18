@@ -6,22 +6,22 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values"};
+option (pubg.vlossom.file) = {entrypointMessage: "Values"};
 
 message Values {
-  option (protoc.gen.vlossom.message_options) = {expose: true};
+  option (pubg.vlossom.message) = {expose: true};
 
   int32 value1 = 1;
   string value2 = 2;
   bool value3 = 3;
   float value4 = 4;
   double value5 = 5;
-  Values2 value6 = 6 [(protoc.gen.vlossom.field_options) = {expose: false}];
+  Values2 value6 = 6 [(pubg.vlossom.field) = {expose: false}];
 }
 
 message Values2 {
-  int32 value1 = 1 [(protoc.gen.vlossom.field_options) = {expose: true}];
-  string value2 = 2 [(protoc.gen.vlossom.field_options) = {expose: false}];
+  int32 value1 = 1 [(pubg.vlossom.field) = {expose: true}];
+  string value2 = 2 [(pubg.vlossom.field) = {expose: false}];
   bool value3 = 3;
   float value4 = 4;
   double value5 = 5;
