@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package tests;
+
+import "options.proto";
+
+option go_package = "github.com/sample";
+
+option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values", expose: true};
+
+message Values {
+  // 최소 옵션
+  repeated bool value1 = 1 [(protoc.gen.vlossom.field_options).checkboxSet.options = {simpleOptions: "a", simpleOptions: "b", simpleOptions: "c"}];
+
+  // mandantory checkboxset type
+  repeated bool value2 = 2 [(protoc.gen.vlossom.field_options) = {component: CheckboxSet, checkboxSet: {options: {simpleOptions: "a", simpleOptions: "b", simpleOptions: "c"}}}];
+
+  // mandantory inference -> checkbox가 나와야 함
+  repeated bool value4 = 4 [(protoc.gen.vlossom.field_options) = {component: Inference, checkboxSet: {options: {simpleOptions: "a", simpleOptions: "b", simpleOptions: "c"}}}];
+
+  // labeledoptions
+  repeated bool value5 = 5 [(protoc.gen.vlossom.field_options).checkboxSet.options = {
+    labeledOptions: {label: "label1", string: "value1"},
+    labeledOptions: {label: "label2", string: "value2"},
+    labeledOptions: {label: "label3", string: "value3"},
+  }];
+}

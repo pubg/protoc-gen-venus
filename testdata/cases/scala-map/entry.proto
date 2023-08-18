@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package tests;
+
+import "options.proto";
+
+option go_package = "github.com/sample";
+
+option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values", expose: true};
+
+message Values {
+  // Default Options
+  map<string, string> value1 = 1;
+
+  // Full Options
+  map<string, string> value2 = 2 [(protoc.gen.vlossom.field_options) = {jsonEditor: {height: 300}}];
+}

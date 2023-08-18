@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"proc-gen-vlossom/generator"
+	"proc-gen-vlossom/generator/protooptions"
 
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/types/pluginpb"
@@ -14,7 +15,7 @@ func main() {
 		ParamFunc: flags.Set,
 	}
 
-	conf := &generator.PluginOptions{
+	conf := &protooptions.PluginOptions{
 		ExposeAll:        flags.Bool("expose_all", false, `expose all fields, By default, only fields annotated with 'expose' are exposed.`),
 		OutputFileSuffix: flags.String("output_file_suffix", ".vlossom.json", `output file suffix.`),
 	}

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"path/filepath"
+	"proc-gen-vlossom/generator/protooptions"
 	"proc-gen-vlossom/generator/vlossom"
 
 	"github.com/samber/lo"
@@ -13,10 +14,10 @@ import (
 
 type VlossomGenerator struct {
 	plugin  *protogen.Plugin
-	options *PluginOptions
+	options *protooptions.PluginOptions
 }
 
-func NewVlossomGenerator(plugin *protogen.Plugin, options *PluginOptions) *VlossomGenerator {
+func NewVlossomGenerator(plugin *protogen.Plugin, options *protooptions.PluginOptions) *VlossomGenerator {
 	return &VlossomGenerator{plugin: plugin, options: options}
 }
 
@@ -56,7 +57,7 @@ func (g *VlossomGenerator) Run() error {
 
 func (g *VlossomGenerator) buildFromFile(ctx *HierarchicalContext, file *protogen.File) ([]vlossom.Component, error) {
 	fd := file.Desc
-	fo := GetFileOptions(fd)
+	fo := protooptions.GetFileOptions(fd)
 	if fo == nil {
 		return nil, fmt.Errorf("FileOption must be set, File: %s", fd.Path())
 	}
@@ -75,7 +76,7 @@ func (g *VlossomGenerator) buildFromFile(ctx *HierarchicalContext, file *protoge
 
 func (g *VlossomGenerator) buildFromMessage(ctx *HierarchicalContext, message *protogen.Message) ([]vlossom.Component, error) {
 	md := message.Desc
-	mo := GetMessageOptions(md)
+	mo := protooptions.GetMessageOptions(md)
 
 	ctx = NewFromHierarchicalContext(ctx)
 	if mo != nil {
@@ -95,7 +96,7 @@ func (g *VlossomGenerator) buildFromMessage(ctx *HierarchicalContext, message *p
 
 func (g *VlossomGenerator) buildFromField(ctx *HierarchicalContext, field *protogen.Field) ([]vlossom.Component, error) {
 	fd := field.Desc
-	fo := GetFieldOptions(fd)
+	fo := protooptions.GetFieldOptions(fd)
 
 	ctx = NewFromHierarchicalContext(ctx)
 	if fo != nil {
@@ -109,10 +110,23 @@ func (g *VlossomGenerator) buildFromField(ctx *HierarchicalContext, field *proto
 		ctx.AppendPropertyName(fd.Name())
 	}
 
+	// Well-Known Types
+	if IsWellKnownKind(fd) {
+		if !ctx.Expose() {
+			return nil, nil
+		}
+		component, err := g.buildFromScalaWellKnownField(ctx, field)
+		if err != nil {
+			return nil, err
+		}
+		return []vlossom.Component{component}, nil
+	}
+
+	// Repeated Types
 	// TODO: Tool Part랑 어떻게 repeated 구현할지 논의해야 함
 	_ = fd.Cardinality() == protoreflect.Repeated
 
-	// Nested Type
+	// Nested Types
 	if fd.Kind() == protoreflect.GroupKind {
 		return g.buildFromMessage(ctx, field.Message)
 	} else if fd.Kind() == protoreflect.MessageKind && !fd.IsMap() {
@@ -121,7 +135,7 @@ func (g *VlossomGenerator) buildFromField(ctx *HierarchicalContext, field *proto
 		// TODO: Tool Part랑 어떻게 oneof 구현할지 논의해야 함
 	}
 
-	// Scala Type
+	// Scala Types
 	if !ctx.Expose() {
 		return nil, nil
 	}

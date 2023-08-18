@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package tests;
+
+import "options.proto";
+
+option go_package = "github.com/sample";
+
+option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values",  expose: true};
+
+message Values {
+  int32 value1 = 1 [json_name = "value_1"];
+  string value2 = 2 [json_name = "js-developer-hate-name"];
+  bool value3 = 3 [json_name = "!string:asdf"];
+  float value4 = 4 [json_name = "Is this support whitespace in name?"];
+  double value5 = 5 [json_name = "{\"json-in-json\":\"bar\"}"];
+  Values2 value6 = 6 [(protoc.gen.vlossom.field_options) = {property: "overrides_nested_message_name_value6"}];
+  Values2 value7 = 7 [json_name = "overrides_nested_message_name_value7"];
+
+  // 명시적인 파라미터를 우선시한다. property -> json_name -> field name
+  Values2 value8 = 8 [(protoc.gen.vlossom.field_options) = {property: "property_name_value8"}, json_name = "json_name_value8"];
+}
+
+message Values2 {
+  int32 value1 = 1 [json_name = "nested_value1"];
+  string value2 = 2  [json_name = "nested_value2"];
+  bool value3 = 3 [(protoc.gen.vlossom.field_options) = {property: "nested_value3"}];
+  float value4 = 4;
+  double value5 = 5;
+}

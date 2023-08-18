@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package tests;
+
+import "options.proto";
+
+option go_package = "github.com/sample";
+
+option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values", expose: true};
+
+message Values {
+  // Full Options
+  int32 value1 = 1 [(protoc.gen.vlossom.field_options) = {input: {type: number, min: 1, max: 100}}];
+
+  // type 생략, type으로 number가 나와야 한다
+  int32 value2 = 2 [(protoc.gen.vlossom.field_options) = {}];
+
+  // type inference 명시적 지정
+  int32 value3 = 3 [(protoc.gen.vlossom.field_options) = {input: {type:inference}}];
+
+  // type 이상한거 지정, 일단은 에러 없이 나와야 한다.
+  // 나중에 에러 뱉게 바꿀지도?
+  int32 value4 = 4 [(protoc.gen.vlossom.field_options) = {input: {type:text}}];
+
+  // min 0 지원
+  int32 value5 = 5 [(protoc.gen.vlossom.field_options) = {input: {min: 0}}];
+
+  // max 0 지원
+  int32 value6 = 6 [(protoc.gen.vlossom.field_options) = {input: {max: 0}}];
+
+  // min 0 아닌 값 지원
+  int32 value7 = 7 [(protoc.gen.vlossom.field_options) = {input: {min: 100}}];
+
+  // max 0 아닌 값 지원
+  int32 value8 = 8 [(protoc.gen.vlossom.field_options) = {input: {max: 100}}];
+
+  // int32 외의 모든 number types 지원
+  // uint는 min 0으로 지정해야 하나?
+  int64 int64 = 9;
+  sint32 sint32 = 10;
+  sint64 sint64 = 11;
+  uint32 uint32 = 12;
+  uint64 uint64 = 13;
+  fixed32 fixed32 = 14;
+  fixed64 fixed64 = 15;
+  sfixed32 sfixed32 = 16;
+  sfixed64 sfixed64 = 17;
+  double double = 18;
+  float float = 19;
+}

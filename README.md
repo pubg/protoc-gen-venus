@@ -1,6 +1,6 @@
 # protoc-gen-vlossom
 
-[Vlossom](https://git.projectbro.com/dev2_tool/venus)의 Dynamic Form을 만드는 proto plugin
+Vlossom의 Dynamic Form을 만드는 proto plugin
 
 ## Getting Started
 1. 원하는 디렉토리에 proto/options.proto와 example.proto를 만듭니다. 
@@ -27,10 +27,10 @@ example.proto
 
 ## Scala Field Features
 - [ ] select with external source: 툴파트랑 필드 이름 논의해야 함
-- [ ] string options: min, max, regex?
-- [ ] number options: ?
-- [ ] boolean type: checkbox or toggle
-- [ ] enum type: select or radio set
+- [x] string options: min, max, regex?
+- [x] number options: ?
+- [x] boolean type: checkbox or toggle
+- [x] enum type: select or radio set
 
 ## Scala Type
 1. String
@@ -38,9 +38,20 @@ example.proto
 3. Enum
 4. Boolean
 
+## Well-known type
+- [ ] Any
+- [ ] timestamp
+- [ ] duration
+- [ ] k8s.io.apimachinery.pkg.apis.util.v1.IntOrString
+- [ ] k8s.io.api.pkg.core.v1.Volume
+- [x] map
+- [x] boolean-repeated
+- https://protobuf.dev/reference/protobuf/google.protobuf/
+
 ## 추후 과제
 - [ ] 2차원 Location Override
-- [ ] Property Override
+- [x] Property Override
+- [ ] protobuf package name change to [pubg.vlossom]
 
 # How run without protoc (Standalone mode)
 1. sh examples/debug_input_generate.sh 

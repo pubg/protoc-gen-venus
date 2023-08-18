@@ -13,7 +13,7 @@ message Values {
 }
 
 message FirstForm {
-  string name = 1 [(protoc.gen.vlossom.field_options).expose = true];
+  string name = 1 [(protoc.gen.vlossom.field_options) = {component: Input, input: {type: text, max: 10}}];
   SecondMessage second_message = 2 [(protoc.gen.vlossom.field_options).expose = true];
   MyEnum my_enum = 3;
   map<string, string> mymap = 4;

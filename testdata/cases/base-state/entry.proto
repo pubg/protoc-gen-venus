@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package tests;
+
+import "options.proto";
+
+option go_package = "github.com/sample";
+
+option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values", expose: true};
+
+message Values {
+  int32 value1 = 1 [(protoc.gen.vlossom.field_options) = {state: primary}];
+  string value2 = 2 [(protoc.gen.vlossom.field_options) = {state: info}];
+  bool value3 = 3 [(protoc.gen.vlossom.field_options) = {state: success}];
+  float value4 = 4 [(protoc.gen.vlossom.field_options) = {state: warn}];
+  double value5 = 5 [(protoc.gen.vlossom.field_options) = {state: idle}];
+  int64 value6 = 6;
+}

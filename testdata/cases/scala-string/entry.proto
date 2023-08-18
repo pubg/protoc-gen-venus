@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package tests;
+
+import "options.proto";
+
+option go_package = "github.com/sample";
+
+option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values", expose: true};
+
+message Values {
+  int32 value1 = 1 [(protoc.gen.vlossom.field_options) = {input: {type: number, min: 1, max: 100}}];
+}

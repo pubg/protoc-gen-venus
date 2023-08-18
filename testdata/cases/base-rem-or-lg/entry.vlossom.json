@@ -5,7 +5,10 @@
       "propertyName": "value1",
       "label": "value1",
       "placeholder": "value1",
-      "required": true
+      "required": true,
+      "grid": {
+        "lg": 10
+      }
     }
   ],
   [
@@ -14,7 +17,8 @@
       "propertyName": "value2",
       "label": "value2",
       "placeholder": "value2",
-      "required": true
+      "required": true,
+      "width": "10rem"
     }
   ],
   [
@@ -23,7 +27,10 @@
       "propertyName": "value3",
       "label": "value3",
       "placeholder": "value3",
-      "required": true
+      "required": true,
+      "grid": {
+        "lg": 10
+      }
     }
   ],
   [
@@ -32,7 +39,8 @@
       "propertyName": "value4",
       "label": "value4",
       "placeholder": "value4",
-      "required": true
+      "required": true,
+      "width": "10rem"
     }
   ],
   [
@@ -41,7 +49,8 @@
       "propertyName": "value5",
       "label": "value5",
       "placeholder": "value5",
-      "required": true
+      "required": true,
+      "width": "10rem"
     }
   ]
 ]

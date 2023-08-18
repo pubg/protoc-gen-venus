@@ -1,0 +1,33 @@
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - id: protoc-gen-vlossom
+    main: cmd/protoc-gen-vlossom/main.go
+    binary: protoc-gen-vlossom
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    goarm:
+      - 8
+archives:
+  - id: protoc-gen-vlossom-archive
+    name_template: |-
+      protoc-gen-vlossom_{{ .Tag }}_{{ .Os }}_{{ .Arch -}}
+    builds:
+      - protoc-gen-vlossom
+    format_overrides:
+      - goos: windows
+        format: zip
+    files: [""]
+checksum:
+  name_template: "checksums.txt"
+  algorithm: sha256

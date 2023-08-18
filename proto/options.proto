@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package protoc.gen.vlossom;
-option go_package = "protoc-gen-vlossom/generator";
+option go_package = "protoc-gen-vlossom/generator/protooptions";
 
 import "google/protobuf/descriptor.proto";
 
@@ -18,42 +18,123 @@ message FileOptions {
 
 message MessageOptions {
   optional bool expose = 1;
-  string property = 2;
 }
 
 message FieldOptions {
   optional bool expose = 1;
   string property = 2;
-  int32 lg = 3;
-  string label = 4;
-  string placeholder = 5;
-  ComponentType component = 6;
-
-  StringOptions string = 10;
-  NumberOptions number = 11;
-
-  message StringOptions {
-    optional int32 min = 1;
-    optional int32 max = 2;
-    optional string regex = 3;
+  oneof width {
+    int32 rem = 3;
+    int32 lg = 4;
   }
-  message NumberOptions {
-    bool slide = 1;
-    optional int32 min = 2;
-    optional int32 max = 3;
+  string label = 5;
+  string placeholder = 6;
+  State state = 7;
+  ComponentType component = 8;
+
+  oneof Options {
+    InputOptions input = 21;
+    MultiStringOptions multiString = 22;
+    SelectOptions select = 23;
+    CheckboxSetOptions checkboxSet = 24;
+    TextAreaOptions textArea = 25;
+    JsonEditorOptions jsonEditor = 26;
+    RadioOptions radio = 27;
+    RadioSetOptions radioSet = 28;
   }
 }
 
+enum State {
+  unspecified = 0;
+  primary = 1;
+  info = 2;
+  success = 3;
+  warn = 4;
+  idle = 5;
+}
+
 enum ComponentType {
-  Default = 0;
+  Inference = 0;
   Input = 1;
-  Select = 2;
-  Checkbox = 3;
-  Switch = 4;
-  RadioSet = 5;
-  DateRangePicker = 6;
-  DateTimePicker = 7;
-  JsonEditor = 8;
+  MultiString = 2;
+  Select = 3;
+  Checkbox = 4;
+  CheckboxSet = 5;
+  Switch = 6;
+  DateRangePicker = 7;
+  DateTimePicker = 8;
+  TextArea = 9;
+  JsonEditor = 10;
+  Radio = 11;
+  RadioSet = 12;
+}
+
+message InputOptions {
+  enum Type {
+    inference = 0;
+    text = 1;
+    number = 2;
+  }
+  Type type = 1;
+  optional int32 min = 2;
+  optional int32 max = 3;
+}
+
+message MultiStringOptions {
+  string delimeter = 1;
+  optional int32 max = 2;
+  bool noChips = 3;
+  bool copy = 4;
+}
+
+message SelectOptions {
+  VlossomOptions options = 1;
+  bool autocomplete = 2;
+  bool multiple = 3;
+  bool selectAll = 4 [json_name = "select-all"];
+  bool collapseChips = 5 [json_name = "collapse-chips"];
+  bool closableChips = 6 [json_name = "closable-chips"];
+  optional int32 infiniteLoad = 7 [json_name = "infinite-load"];
+}
+
+message CheckboxSetOptions {
+  VlossomOptions options = 1;
+  bool column = 2;
+}
+
+message TextAreaOptions {
+  optional int32 min = 1;
+  optional int32 max = 2;
+}
+
+message JsonEditorOptions {
+  optional int32 height = 1;
+}
+
+message RadioOptions {
+  string radioLabel = 1;
+  string name = 2;
+}
+
+message RadioSetOptions {
+  VlossomOptions options = 1;
+  bool column = 2;
+}
+
+message VlossomOptions {
+  repeated string simpleOptions = 1 [json_name = "options"];
+  repeated LabeledOption labeledOptions = 2 [json_name = "options"];
+  optional string optionLabel = 3 [json_name = "option-label"];
+  optional string optionValue = 4 [json_name = "option-value"];
+
+  message LabeledOption {
+    string label = 1;
+    oneof Value {
+      string string = 2;
+      int64 integer = 3;
+      double float = 4;
+    }
+  }
 }
 
 message EnumOptions {
