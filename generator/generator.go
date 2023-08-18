@@ -37,7 +37,7 @@ func (g *VlossomGenerator) Run() error {
 			return err
 		}
 
-		buf, err := generateToJson(components)
+		buf, err := g.generateToJson(components)
 		if err != nil {
 			return err
 		}
@@ -146,12 +146,16 @@ func (g *VlossomGenerator) buildFromField(ctx *HierarchicalContext, field *proto
 	return []vlossom.Component{component}, nil
 }
 
-func generateToJson(components []vlossom.Component) ([]byte, error) {
+func (g *VlossomGenerator) generateToJson(components []vlossom.Component) ([]byte, error) {
 	var transformed [][]vlossom.Component
 	for _, component := range components {
 		transformed = append(transformed, []vlossom.Component{component})
 	}
-	return json.MarshalIndent(transformed, "", "  ")
+	if *g.options.PrettyOutput {
+		return json.MarshalIndent(transformed, "", "  ")
+	} else {
+		return json.Marshal(transformed)
+	}
 }
 
 func generateFileName(file *protogen.File, suffix string) string {

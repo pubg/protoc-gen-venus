@@ -13,5 +13,5 @@ message Values {
   map<string, string> value1 = 1;
 
   // Full Options
-  map<string, string> value2 = 2 [(protoc.gen.vlossom.field_options) = {jsonEditor: {height: 300}}];
+  map<string, string> value2 = 2 [(protoc.gen.vlossom.field_options) = {json_editor: {height: 300}}];
 }

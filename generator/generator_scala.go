@@ -75,7 +75,7 @@ func (g *VlossomGenerator) buildFromStringField(field *protogen.Field, component
 	fo := protooptions.GetFieldOptions(field.Desc)
 	switch componentType {
 	case protooptions.ComponentType_Input:
-		return buildFromInputOptions(fo.GetInput(), protooptions.InputOptions_number.String(), base), nil
+		return buildFromInputOptions(fo.GetInput(), protooptions.InputOptions_text.String(), base), nil
 	case protooptions.ComponentType_Select:
 		if fo.GetSelect() == nil {
 			return nil, fmt.Errorf("failed buildFromStringField, select options is nil")

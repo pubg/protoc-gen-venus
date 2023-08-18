@@ -24,3 +24,4 @@ go.work
 examples/protoc-gen-vlossom
 examples/example.vlossom.json
 **/request.pb.bin
+**/request.pb.json

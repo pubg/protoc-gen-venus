@@ -81,10 +81,14 @@ func ToWellKnownKind(fd protoreflect.FieldDescriptor) *WellKnownKind {
 		return &JsonKind
 	}
 
+	// TODO: well-known type 추가해야 함
 	if fd.Kind() == protoreflect.MessageKind {
 		switch fd.Message().FullName() {
 		case "google.protobuf.Any":
 		case "google.protobuf.Timestamp":
+		case "google.protobuf.Duration":
+		case "k8s.io.apimachinery.pkg.apis.util.v1.IntOrString":
+		case "k8s.io.api.pkg.core.v1.Volume":
 		}
 	}
 	return nil

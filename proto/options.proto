@@ -7,8 +7,9 @@ import "google/protobuf/descriptor.proto";
 
 // Not extendable, just define structure
 message PluginOptions {
-  optional bool exposeAll = 1;
-  optional string outputFileSuffix = 2;
+  optional bool expose_all = 1;
+  optional string output_file_suffix = 2;
+  optional bool pretty_output = 3;
 }
 
 message FileOptions {
@@ -34,13 +35,13 @@ message FieldOptions {
 
   oneof Options {
     InputOptions input = 21;
-    MultiStringOptions multiString = 22;
+    MultiStringOptions multi_string = 22;
     SelectOptions select = 23;
     CheckboxSetOptions checkboxSet = 24;
-    TextAreaOptions textArea = 25;
-    JsonEditorOptions jsonEditor = 26;
+    TextAreaOptions text_area = 25;
+    JsonEditorOptions json_editor = 26;
     RadioOptions radio = 27;
-    RadioSetOptions radioSet = 28;
+    RadioSetOptions radio_set = 28;
   }
 }
 
@@ -91,10 +92,10 @@ message SelectOptions {
   VlossomOptions options = 1;
   bool autocomplete = 2;
   bool multiple = 3;
-  bool selectAll = 4 [json_name = "select-all"];
-  bool collapseChips = 5 [json_name = "collapse-chips"];
-  bool closableChips = 6 [json_name = "closable-chips"];
-  optional int32 infiniteLoad = 7 [json_name = "infinite-load"];
+  bool select_all = 4 [json_name = "select-all"];
+  bool collapse_chips = 5 [json_name = "collapse-chips"];
+  bool closable_chips = 6 [json_name = "closable-chips"];
+  optional int32 infinite_load = 7 [json_name = "infinite-load"];
 }
 
 message CheckboxSetOptions {
@@ -112,7 +113,7 @@ message JsonEditorOptions {
 }
 
 message RadioOptions {
-  string radioLabel = 1;
+  string radio_label = 1;
   string name = 2;
 }
 
@@ -122,10 +123,10 @@ message RadioSetOptions {
 }
 
 message VlossomOptions {
-  repeated string simpleOptions = 1 [json_name = "options"];
-  repeated LabeledOption labeledOptions = 2 [json_name = "options"];
-  optional string optionLabel = 3 [json_name = "option-label"];
-  optional string optionValue = 4 [json_name = "option-value"];
+  repeated string simple_options = 1 [json_name = "options"];
+  repeated LabeledOption labeled_options = 2 [json_name = "options"];
+  optional string option_label = 3 [json_name = "option-label"];
+  optional string option_value = 4 [json_name = "option-value"];
 
   message LabeledOption {
     string label = 1;

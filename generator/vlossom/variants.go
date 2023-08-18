@@ -45,8 +45,8 @@ func NewMultiString(base BaseComponentOptions) *MultiString {
 }
 
 type Select struct {
-	BaseComponent `json:",inline"`
-	Options       *VlossomOptions `json:",inline,omitempty"`
+	BaseComponent   `json:",inline"`
+	*VlossomOptions `json:",inline"`
 	// Apply autocomplete
 	Autocomplete bool `json:"autocomplete"`
 	// Can choose multiple options
@@ -62,7 +62,7 @@ type Select struct {
 }
 
 func NewSelect(base BaseComponentOptions, options *VlossomOptions) *Select {
-	return &Select{BaseComponent: NewBaseComponent("vn-select", base), Options: options}
+	return &Select{BaseComponent: NewBaseComponent("vn-select", base), VlossomOptions: options}
 }
 
 type Checkbox struct {
@@ -143,11 +143,11 @@ func NewRadio(base BaseComponentOptions, name string) *Radio {
 }
 
 type RadioSet struct {
-	BaseComponent `json:",inline"`
-	Options       *VlossomOptions `json:",inline"`
-	Column        bool            `json:"column"`
+	BaseComponent   `json:",inline"`
+	*VlossomOptions `json:",inline"`
+	Column          bool `json:"column"`
 }
 
 func NewRadioSet(base BaseComponentOptions, options *VlossomOptions) *RadioSet {
-	return &RadioSet{BaseComponent: NewBaseComponent("vn-radio-set", base), Options: options}
+	return &RadioSet{BaseComponent: NewBaseComponent("vn-radio-set", base), VlossomOptions: options}
 }

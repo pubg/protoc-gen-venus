@@ -9,5 +9,102 @@ option go_package = "github.com/sample";
 option (protoc.gen.vlossom.file_options) = {entrypointMessage: "Values", expose: true};
 
 message Values {
-  int32 value1 = 1 [(protoc.gen.vlossom.field_options) = {input: {type: number, min: 1, max: 100}}];
+  // Default Options
+  string value1 = 1 [(protoc.gen.vlossom.field_options) = {component:Inference}];
+
+  // Component: Input
+  string value2 = 2 [(protoc.gen.vlossom.field_options) = {
+    component:Input,
+    input: {
+      min: 1,
+      max: 10,
+      type: text,
+    }
+  }];
+
+  // Component: Select Simple
+  string value3 = 3 [(protoc.gen.vlossom.field_options) = {
+    component:Select,
+    select: {
+      options: {
+        simple_options: "option1",
+        simple_options: "option2",
+      }
+    }
+  }];
+
+  // Component: Select Labeled
+  string value4 = 4 [(protoc.gen.vlossom.field_options) = {
+    component:Select,
+    select: {
+      options: {
+        labeled_options: {label: "label1", string: "option1"},
+        labeled_options: {label: "label2", string: "option2"},
+      }
+    }
+  }];
+
+  // Component: RadioSet Simple
+  string value5 = 5 [(protoc.gen.vlossom.field_options) = {
+    component:RadioSet,
+    radio_set: {
+      options: {
+        simple_options: "option1",
+        simple_options: "option2",
+      }
+    }
+  }];
+
+  // Component: RadioSet Labeled
+  string value6 = 6 [(protoc.gen.vlossom.field_options) = {
+    component:RadioSet,
+    radio_set: {
+      options: {
+        labeled_options: {label: "label1", string: "option1"},
+        labeled_options: {label: "label2", string: "option2"},
+      }
+    }
+  }];
+
+  // Component: DataRangePicker
+  string value7 = 7 [(protoc.gen.vlossom.field_options) = {
+    component:DateRangePicker,
+  }];
+
+  // Component: DataTimePicker
+  string value8 = 8 [(protoc.gen.vlossom.field_options) = {
+    component:DateTimePicker,
+  }];
+
+  // Component: MultiString Default Options
+  string value9 = 9 [(protoc.gen.vlossom.field_options) = {
+    component:MultiString,
+  }];
+
+  // Component: MultiString Many Options
+  string value10 = 10 [(protoc.gen.vlossom.field_options) = {
+    component:MultiString,
+    multi_string: {
+      copy: true,
+      max: 1000,
+      noChips: false,
+    }
+  }];
+
+  // Component: TextArea
+  string value11 = 11 [(protoc.gen.vlossom.field_options) = {
+    component:TextArea,
+    text_area: {
+      max: 1000,
+      min: 0,
+    }
+  }];
+
+  // Component: JsonEditor
+  string value12 = 12 [(protoc.gen.vlossom.field_options) = {
+    component:JsonEditor,
+    json_editor: {
+      height: 1000,
+    }
+  }];
 }
