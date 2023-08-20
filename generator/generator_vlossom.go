@@ -2,8 +2,9 @@ package generator
 
 import (
 	"fmt"
-	"proc-gen-vlossom/generator/protooptions"
-	"proc-gen-vlossom/generator/vlossom"
+
+	"github.com/pubg/protoc-gen-vlossom/generator/protooptions"
+	"github.com/pubg/protoc-gen-vlossom/generator/vlossom"
 )
 
 func buildFromInputOptions(option *protooptions.InputOptions, defaultType string, base vlossom.BaseComponentOptions) vlossom.Component {

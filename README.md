@@ -3,13 +3,41 @@
 Vlossom의 Dynamic Form을 만드는 proto plugin
 
 ## Getting Started
-1. 원하는 디렉토리에 proto/options.proto와 example.proto를 만듭니다. 
+1. protoc-gen-vlossom을 설치합니다.
+```shell
+go install github.com/pubg/protoc-gen-vlossom/cmd/protoc-gen-vlossom@main
+```
+2. proto/options.proto를 Workdir에 복사합니다. 
+3. 아래 내용대로 example.proto 파일을 생성합니다. 
+```
+syntax = "proto3";
+package schema;
+import "options.proto";
+option (pubg.vlossom.file) = {expose: true, entrypointMessage: "Values"};
+
+message Values {
+  string sample_input = 1 [(pubg.vlossom.field) = {component: Input, input: {type: text, max: 10}}];
+  MyEnum my_enum = 2;
+}
+
+enum MyEnum {
+  FOO = 0;
+  BAR = 1;
+  BAZ = 2;
+}
+```
+4. 다음 명령어를 실행합니다.
+```shell
+protoc \
+  --vlossom_out=./ \
+  -I ./ \
+  ./example.proto
+```
 
 #### Workdir 상태
-```
 options.proto
 example.proto
-```
+
 
 2. example.proto에 아래 내용을 채웁니다.
 

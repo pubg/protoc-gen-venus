@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"path/filepath"
-	"proc-gen-vlossom/generator/protooptions"
-	"proc-gen-vlossom/generator/vlossom"
+
+	"github.com/pubg/protoc-gen-vlossom/generator/protooptions"
+	"github.com/pubg/protoc-gen-vlossom/generator/vlossom"
 
 	"github.com/samber/lo"
 	"google.golang.org/protobuf/compiler/protogen"

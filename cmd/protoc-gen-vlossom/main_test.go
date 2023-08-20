@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
-	"proc-gen-vlossom/generator"
 	"testing"
+
+	"github.com/pubg/protoc-gen-vlossom/generator"
 
 	"github.com/samber/lo"
 	"github.com/stretchr/testify/require"

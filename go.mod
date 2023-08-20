@@ -1,4 +1,4 @@
-module proc-gen-vlossom
+module github.com/pubg/protoc-gen-vlossom
 
 go 1.20
 
