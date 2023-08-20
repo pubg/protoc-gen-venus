@@ -38,13 +38,13 @@ func (g *VlossomGenerator) Run() error {
 			return err
 		}
 
+		if len(components) == 0 {
+			continue
+		}
+
 		buf, err := g.generateToJson(components)
 		if err != nil {
 			return err
-		}
-
-		if len(buf) == 0 {
-			continue
 		}
 
 		outputFile := g.plugin.NewGeneratedFile(generateFileName(file, *g.options.OutputFileSuffix), "")

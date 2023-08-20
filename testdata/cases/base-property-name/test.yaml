@@ -1,0 +1,5 @@
+name: "Property Name Override"
+description: "Test for property name override"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false

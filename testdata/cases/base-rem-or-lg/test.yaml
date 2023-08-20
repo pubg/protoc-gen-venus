@@ -1,0 +1,4 @@
+description: "Just a basic test to make sure the plugin works"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
