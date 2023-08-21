@@ -1,0 +1,9 @@
+name: "Scala Test: Map"
+description: "Scala Map Test"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+  Test all Map field options
+

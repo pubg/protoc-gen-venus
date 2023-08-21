@@ -6,6 +6,7 @@
       "label": "value1",
       "placeholder": "value1",
       "required": true,
+      "grid": {},
       "type": "number"
     }
   ],
@@ -16,6 +17,7 @@
       "label": "value2",
       "placeholder": "value2",
       "required": true,
+      "width": "1rem",
       "type": "text"
     }
   ],
@@ -25,7 +27,10 @@
       "propertyName": "value3",
       "label": "value3",
       "placeholder": "value3",
-      "required": false
+      "required": false,
+      "grid": {
+        "lg": 2
+      }
     }
   ],
   [
@@ -35,6 +40,7 @@
       "label": "value4",
       "placeholder": "value4",
       "required": true,
+      "grid": {},
       "type": "number"
     }
   ],
@@ -45,55 +51,79 @@
       "label": "value5",
       "placeholder": "value5",
       "required": true,
+      "grid": {
+        "sm": 4,
+        "md": 4
+      },
       "type": "number"
-    }
-  ],
-  [
-    {
-      "component": "vn-input",
-      "propertyName": "value6.value1",
-      "label": "value1",
-      "placeholder": "value1",
-      "required": true,
-      "type": "number"
-    }
-  ],
-  [
-    {
-      "component": "vn-input",
-      "propertyName": "value6.value2",
-      "label": "value2",
-      "placeholder": "value2",
-      "required": true,
-      "type": "text"
     }
   ],
   [
     {
       "component": "vn-checkbox",
-      "propertyName": "value6.value3",
-      "label": "value3",
-      "placeholder": "value3",
-      "required": false
+      "propertyName": "value6",
+      "label": "value6",
+      "placeholder": "value6",
+      "required": false,
+      "grid": {
+        "lgOffset": 5
+      }
     }
   ],
   [
     {
       "component": "vn-input",
-      "propertyName": "value6.value4",
-      "label": "value4",
-      "placeholder": "value4",
+      "propertyName": "value7",
+      "label": "value7",
+      "placeholder": "value7",
       "required": true,
+      "grid": {},
       "type": "number"
     }
   ],
   [
     {
       "component": "vn-input",
-      "propertyName": "value6.value5",
-      "label": "value5",
-      "placeholder": "value5",
+      "propertyName": "value8",
+      "label": "value8",
+      "placeholder": "value8",
       "required": true,
+      "grid": {
+        "smOffset": 7,
+        "mdOffset": 7
+      },
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "value9",
+      "label": "value9",
+      "placeholder": "value9",
+      "required": true,
+      "grid": {
+        "order": 8
+      },
+      "type": "text"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "value10",
+      "label": "value10",
+      "placeholder": "value10",
+      "required": true,
+      "grid": {
+        "sm": 4,
+        "md": 4,
+        "lg": 2,
+        "smOffset": 7,
+        "mdOffset": 7,
+        "lgOffset": 5,
+        "order": 8
+      },
       "type": "number"
     }
   ]

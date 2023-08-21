@@ -1,4 +1,4 @@
-syntax = "proto3";
+syntax = "proto2";
 
 package tests;
 
@@ -6,14 +6,12 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (pubg.vlossom.file) = {entrypointMessage: "Values"};
-
-message Values {
+message ValuesProto2 {
   option (pubg.vlossom.message) = {expose: true};
 
   optional int32 value1 = 1;
-  string value2 = 2;
+  required string value2 = 2;
   optional bool value3 = 3;
-  float value4 = 4;
-  double value5 = 5;
+  required float value4 = 4;
+  required double value5 = 5;
 }

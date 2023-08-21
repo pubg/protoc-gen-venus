@@ -1,0 +1,11 @@
+name: "Expose Test: Scala Field Level Deny"
+description: "Expose Scala Field Level Deny"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+  Some Scala field are denied to expose
+  
+  Those filed are not exist in result
+

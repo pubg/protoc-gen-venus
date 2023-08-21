@@ -1,0 +1,19 @@
+name: "Base Component: Proto Optional"
+description: "Proto Optional label convert to vlossom required field"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+  if proto3 and optional label exist:
+    vlossom component should be required: false
+  
+  if proto3 and optional label not exist:
+    vlossom component should be required: true
+  
+  if proto2 and optional label exist:
+    vlossom component should be required: false
+  
+  if proto2 and required label exist:
+    vlossom component should be required: true
+  

@@ -11,9 +11,8 @@ for proto_dir in $proto_dirs; do
     --plugin=protoc-gen-vlossom=prodoc-gen-debug \
     --debug_out=../cases/$proto_dir \
     --debug_opt=dump_binary=true \
-    --debug_opt=dump_json=true \
     -I ../../proto \
-    -I ../cases \
-    ../cases/$proto_dir/*.proto
+    -I ../cases/$proto_dir \
+    ../cases/$proto_dir/entry.proto
 done
 

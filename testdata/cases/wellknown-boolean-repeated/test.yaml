@@ -1,0 +1,9 @@
+name: "WellKnown Test: Boolean Repeated"
+description: "WellKnown Boolean Repeated Test"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+  Test all boolean repeated field options
+

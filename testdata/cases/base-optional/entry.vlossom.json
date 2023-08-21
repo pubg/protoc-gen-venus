@@ -5,8 +5,7 @@
       "propertyName": "value1",
       "label": "value1",
       "placeholder": "value1",
-      "required": true,
-      "state": "primary",
+      "required": false,
       "type": "number"
     }
   ],
@@ -17,7 +16,6 @@
       "label": "value2",
       "placeholder": "value2",
       "required": true,
-      "state": "info",
       "type": "text"
     }
   ],
@@ -27,8 +25,7 @@
       "propertyName": "value3",
       "label": "value3",
       "placeholder": "value3",
-      "required": false,
-      "state": "success"
+      "required": false
     }
   ],
   [
@@ -38,7 +35,6 @@
       "label": "value4",
       "placeholder": "value4",
       "required": true,
-      "state": "warn",
       "type": "number"
     }
   ],
@@ -49,16 +45,54 @@
       "label": "value5",
       "placeholder": "value5",
       "required": true,
-      "state": "idle",
       "type": "number"
     }
   ],
   [
     {
       "component": "vn-input",
-      "propertyName": "value6",
-      "label": "value6",
-      "placeholder": "value6",
+      "propertyName": "value6.value1",
+      "label": "value1",
+      "placeholder": "value1",
+      "required": false,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "value6.value2",
+      "label": "value2",
+      "placeholder": "value2",
+      "required": true,
+      "type": "text"
+    }
+  ],
+  [
+    {
+      "component": "vn-checkbox",
+      "propertyName": "value6.value3",
+      "label": "value3",
+      "placeholder": "value3",
+      "required": false
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "value6.value4",
+      "label": "value4",
+      "placeholder": "value4",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "value6.value5",
+      "label": "value5",
+      "placeholder": "value5",
       "required": true,
       "type": "number"
     }

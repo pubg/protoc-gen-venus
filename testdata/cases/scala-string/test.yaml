@@ -1,0 +1,9 @@
+name: "Scala Test: String"
+description: "Scala String Test"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+  Test all String field options
+

@@ -1,0 +1,9 @@
+name: "Expose Test: Field Level Inherit"
+description: "Expose Field Level Inherit"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+  Expose options should inherit from file level
+

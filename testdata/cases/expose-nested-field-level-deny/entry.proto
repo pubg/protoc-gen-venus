@@ -9,14 +9,12 @@ option go_package = "github.com/sample";
 option (pubg.vlossom.file) = {entrypointMessage: "Values"};
 
 message Values {
-  option (pubg.vlossom.message) = {expose: true};
-
   int32 value1 = 1;
   string value2 = 2;
   bool value3 = 3;
   float value4 = 4;
   double value5 = 5;
-  Values2 value6 = 6 [(pubg.vlossom.field) = {expose: false}];
+  Values2 value6 = 6 [(pubg.vlossom.field) = {expose: true}];
 }
 
 message Values2 {

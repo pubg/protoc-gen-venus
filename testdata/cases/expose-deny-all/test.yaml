@@ -1,0 +1,11 @@
+name: "Expose Test: Deny All"
+description: "Expose Deny All Fields"
+requestFile: "request.pb.bin"
+expectResultFile: ""
+expectResultIsNull: true
+
+expectedBehavior: |
+  Expose Deny All Fields
+  
+  Result should be not exist
+

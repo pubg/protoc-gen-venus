@@ -12,10 +12,10 @@ func NewBaseComponent(component string, option BaseComponentOptions) BaseCompone
 		Placeholder:  option.Placeholder,
 		Required:     option.Required,
 		State:        option.State,
+		DefaultValue: option.DefaultValue,
+		Messages:     option.Messages,
 		Width:        option.Width,
-	}
-	if option.LG != 0 {
-		base.Grid = &Grid{LG: option.LG}
+		Grid:         option.Grid,
 	}
 	return base
 }
@@ -26,9 +26,10 @@ type BaseComponentOptions struct {
 	Placeholder  string
 	Required     bool
 	State        string
-
-	Width string
-	LG    int
+	DefaultValue any
+	Messages     []Message
+	Width        string
+	Grid         *Grid
 }
 
 type BaseComponent struct {
@@ -43,6 +44,10 @@ type BaseComponent struct {
 	Required bool `json:"required"`
 
 	State string `json:"state,omitempty"`
+
+	DefaultValue any `json:"defaultValue,omitempty"`
+
+	Messages []Message `json:"messages,omitempty"`
 
 	// Width of component conflict with grid
 	Width string `json:"width,omitempty"`
@@ -66,11 +71,22 @@ type BaseComponent struct {
 	NoClear *bool `json:"no-clear,omitempty"`
 }
 
+func (c *BaseComponent) _Component() {}
+
 type Grid struct {
-	LG int `json:"lg"`
+	Sm       *int `json:"sm,omitempty"`
+	Md       *int `json:"md,omitempty"`
+	Lg       *int `json:"lg,omitempty"`
+	SmOffset *int `json:"smOffset,omitempty"`
+	MdOffset *int `json:"mdOffset,omitempty"`
+	LgOffset *int `json:"lgOffset,omitempty"`
+	Order    *int `json:"order,omitempty"`
 }
 
-func (c *BaseComponent) _Component() {}
+type Message struct {
+	State string `json:"state"`
+	Text  string `json:"text"`
+}
 
 type VlossomOptionsOptions interface {
 	_VlossomOptionsOptions()

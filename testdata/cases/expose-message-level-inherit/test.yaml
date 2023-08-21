@@ -1,0 +1,8 @@
+name: "Expose Test: Message Level Inherit"
+description: "Expose Message Level Inherit"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+    Expose options should inherit from message level

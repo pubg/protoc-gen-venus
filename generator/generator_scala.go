@@ -14,24 +14,61 @@ func (g *VlossomGenerator) concreteBaseComponentOptions(ctx *HierarchicalContext
 	base := vlossom.BaseComponentOptions{}
 	base.PropertyName = ctx.PropertiesString()
 	base.Required = !fd.HasOptionalKeyword()
+
+	// Fill Label
 	if fo.GetLabel() == "" {
 		base.Label = fd.TextName()
 	} else {
 		base.Label = fo.GetLabel()
 	}
+
+	// Fille Placeholder
 	if fo.GetPlaceholder() == "" {
 		base.Placeholder = fd.TextName()
 	} else {
 		base.Placeholder = fo.GetPlaceholder()
 	}
-	if fo.GetRem() != 0 {
-		base.Width = fmt.Sprintf("%drem", fo.GetRem())
-	} else if fo.GetLg() != 0 {
-		base.LG = int(fo.GetLg())
-	}
-	// State는 inference를 제공하지 않는다.
+
+	// Fill State, State는 inference를 제공하지 않는다.
 	if fo.GetState() != protooptions.State_unspecified {
 		base.State = fo.GetState().String()
+	}
+
+	// Fill Messages
+	for _, message := range fo.GetMessages() {
+		vMessage := vlossom.Message{}
+		vMessage.Text = message.GetText()
+		if message.GetState() != protooptions.State_unspecified {
+			vMessage.State = message.GetState().String()
+		}
+		base.Messages = append(base.Messages, vMessage)
+	}
+
+	// Fill Grid or Width(rem)
+	switch size := fo.GetSize().(type) {
+	case *protooptions.FieldOptions_Grid:
+		grid := size.Grid
+		base.Grid = &vlossom.Grid{
+			Sm:       intP(grid.Md),
+			Md:       intP(grid.Md),
+			Lg:       intP(grid.Lg),
+			SmOffset: intP(grid.MdOffset),
+			MdOffset: intP(grid.MdOffset),
+			LgOffset: intP(grid.LgOffset),
+			Order:    intP(grid.Order),
+		}
+	case *protooptions.FieldOptions_Rem:
+		base.Width = fmt.Sprintf("%drem", size.Rem)
+	}
+
+	// Fill DefaultValue
+	switch defaultValue := fo.GetDefaultValue().(type) {
+	case *protooptions.FieldOptions_DefaultString:
+		base.DefaultValue = defaultValue.DefaultString
+	case *protooptions.FieldOptions_DefaultInteger:
+		base.DefaultValue = defaultValue.DefaultInteger
+	case *protooptions.FieldOptions_DefaultFloat:
+		base.DefaultValue = defaultValue.DefaultFloat
 	}
 	return base
 }

@@ -1,1 +1,198 @@
-[[{"component":"vn-input","propertyName":"value_1","label":"value1","placeholder":"value1","required":true,"type":"number"}],[{"component":"vn-input","propertyName":"js-developer-hate-name","label":"value2","placeholder":"value2","required":true,"type":"text"}],[{"component":"vn-checkbox","propertyName":"!string:asdf","label":"value3","placeholder":"value3","required":false}],[{"component":"vn-input","propertyName":"Is this support whitespace in name?","label":"value4","placeholder":"value4","required":true,"type":"number"}],[{"component":"vn-input","propertyName":"{\"json-in-json\":\"bar\"}","label":"value5","placeholder":"value5","required":true,"type":"number"}],[{"component":"vn-input","propertyName":"overrides_nested_message_name_value6.nested_value1","label":"value1","placeholder":"value1","required":true,"type":"number"}],[{"component":"vn-input","propertyName":"overrides_nested_message_name_value6.nested_value2","label":"value2","placeholder":"value2","required":true,"type":"text"}],[{"component":"vn-checkbox","propertyName":"overrides_nested_message_name_value6.nested_value3","label":"value3","placeholder":"value3","required":false}],[{"component":"vn-input","propertyName":"overrides_nested_message_name_value6.value4","label":"value4","placeholder":"value4","required":true,"type":"number"}],[{"component":"vn-input","propertyName":"overrides_nested_message_name_value6.value5","label":"value5","placeholder":"value5","required":true,"type":"number"}],[{"component":"vn-input","propertyName":"overrides_nested_message_name_value7.nested_value1","label":"value1","placeholder":"value1","required":true,"type":"number"}],[{"component":"vn-input","propertyName":"overrides_nested_message_name_value7.nested_value2","label":"value2","placeholder":"value2","required":true,"type":"text"}],[{"component":"vn-checkbox","propertyName":"overrides_nested_message_name_value7.nested_value3","label":"value3","placeholder":"value3","required":false}],[{"component":"vn-input","propertyName":"overrides_nested_message_name_value7.value4","label":"value4","placeholder":"value4","required":true,"type":"number"}],[{"component":"vn-input","propertyName":"overrides_nested_message_name_value7.value5","label":"value5","placeholder":"value5","required":true,"type":"number"}],[{"component":"vn-input","propertyName":"property_name_value8.nested_value1","label":"value1","placeholder":"value1","required":true,"type":"number"}],[{"component":"vn-input","propertyName":"property_name_value8.nested_value2","label":"value2","placeholder":"value2","required":true,"type":"text"}],[{"component":"vn-checkbox","propertyName":"property_name_value8.nested_value3","label":"value3","placeholder":"value3","required":false}],[{"component":"vn-input","propertyName":"property_name_value8.value4","label":"value4","placeholder":"value4","required":true,"type":"number"}],[{"component":"vn-input","propertyName":"property_name_value8.value5","label":"value5","placeholder":"value5","required":true,"type":"number"}]]
+[
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "value_1",
+      "label": "value1",
+      "placeholder": "value1",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "js-developer-hate-name",
+      "label": "value2",
+      "placeholder": "value2",
+      "required": true,
+      "type": "text"
+    }
+  ],
+  [
+    {
+      "component": "vn-checkbox",
+      "propertyName": "!string:asdf",
+      "label": "value3",
+      "placeholder": "value3",
+      "required": false
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "Is this support whitespace in name?",
+      "label": "value4",
+      "placeholder": "value4",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "{\"json-in-json\":\"bar\"}",
+      "label": "value5",
+      "placeholder": "value5",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "overrides_nested_message_name_value6.nested_value1",
+      "label": "value1",
+      "placeholder": "value1",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "overrides_nested_message_name_value6.nested_value2",
+      "label": "value2",
+      "placeholder": "value2",
+      "required": true,
+      "type": "text"
+    }
+  ],
+  [
+    {
+      "component": "vn-checkbox",
+      "propertyName": "overrides_nested_message_name_value6.nested_value3",
+      "label": "value3",
+      "placeholder": "value3",
+      "required": false
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "overrides_nested_message_name_value6.value4",
+      "label": "value4",
+      "placeholder": "value4",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "overrides_nested_message_name_value6.value5",
+      "label": "value5",
+      "placeholder": "value5",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "overrides_nested_message_name_value7.nested_value1",
+      "label": "value1",
+      "placeholder": "value1",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "overrides_nested_message_name_value7.nested_value2",
+      "label": "value2",
+      "placeholder": "value2",
+      "required": true,
+      "type": "text"
+    }
+  ],
+  [
+    {
+      "component": "vn-checkbox",
+      "propertyName": "overrides_nested_message_name_value7.nested_value3",
+      "label": "value3",
+      "placeholder": "value3",
+      "required": false
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "overrides_nested_message_name_value7.value4",
+      "label": "value4",
+      "placeholder": "value4",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "overrides_nested_message_name_value7.value5",
+      "label": "value5",
+      "placeholder": "value5",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "property_name_value8.nested_value1",
+      "label": "value1",
+      "placeholder": "value1",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "property_name_value8.nested_value2",
+      "label": "value2",
+      "placeholder": "value2",
+      "required": true,
+      "type": "text"
+    }
+  ],
+  [
+    {
+      "component": "vn-checkbox",
+      "propertyName": "property_name_value8.nested_value3",
+      "label": "value3",
+      "placeholder": "value3",
+      "required": false
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "property_name_value8.value4",
+      "label": "value4",
+      "placeholder": "value4",
+      "required": true,
+      "type": "number"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "property_name_value8.value5",
+      "label": "value5",
+      "placeholder": "value5",
+      "required": true,
+      "type": "number"
+    }
+  ]
+]

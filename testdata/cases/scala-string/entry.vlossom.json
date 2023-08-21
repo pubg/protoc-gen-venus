@@ -1,1 +1,169 @@
-[[{"component":"vn-input","propertyName":"value1","label":"value1","placeholder":"value1","required":true,"type":"text"}],[{"component":"vn-input","propertyName":"value2","label":"value2","placeholder":"value2","required":true,"type":"text","min":1,"max":10}],[{"component":"vn-select","propertyName":"value3","label":"value3","placeholder":"value3","required":true,"options":["option1","option2"],"autocomplete":false,"multiple":false,"select-all":false,"collapse-chips":false,"closable-chips":false}],[{"component":"vn-select","propertyName":"value4","label":"value4","placeholder":"value4","required":true,"options":[{"value":"option1","label":"label1"},{"value":"option2","label":"label2"}],"option-label":"label","option-value":"value","autocomplete":false,"multiple":false,"select-all":false,"collapse-chips":false,"closable-chips":false}],[{"component":"vn-radio-set","propertyName":"value5","label":"value5","placeholder":"value5","required":true,"options":["option1","option2"],"column":false}],[{"component":"vn-radio-set","propertyName":"value6","label":"value6","placeholder":"value6","required":true,"options":[{"value":"option1","label":"label1"},{"value":"option2","label":"label2"}],"option-label":"label","option-value":"value","column":false}],[{"component":"vn-date-range-picker","propertyName":"value7","label":"value7","placeholder":"value7","required":true}],[{"component":"vn-date-time-picker","propertyName":"value8","label":"value8","placeholder":"value8","required":true}],[{"component":"vn-multi-string","propertyName":"value9","label":"value9","placeholder":"value9","required":true,"delimeter":"","max":null,"no-chips":true,"copy":true}],[{"component":"vn-multi-string","propertyName":"value10","label":"value10","placeholder":"value10","required":true,"delimeter":"","max":1000,"no-chips":false,"copy":true}],[{"component":"vn-text-area","propertyName":"value11","label":"value11","placeholder":"value11","required":true,"min":0,"max":1000}],[{"component":"vn-json-editor","propertyName":"value12","label":"value12","placeholder":"value12","required":true,"height":"1000px"}]]
+[
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "value1",
+      "label": "value1",
+      "placeholder": "value1",
+      "required": true,
+      "type": "text"
+    }
+  ],
+  [
+    {
+      "component": "vn-input",
+      "propertyName": "value2",
+      "label": "value2",
+      "placeholder": "value2",
+      "required": true,
+      "type": "text",
+      "min": 1,
+      "max": 10
+    }
+  ],
+  [
+    {
+      "component": "vn-select",
+      "propertyName": "value3",
+      "label": "value3",
+      "placeholder": "value3",
+      "required": true,
+      "options": [
+        "option1",
+        "option2"
+      ],
+      "autocomplete": false,
+      "multiple": false,
+      "select-all": false,
+      "collapse-chips": false,
+      "closable-chips": false
+    }
+  ],
+  [
+    {
+      "component": "vn-select",
+      "propertyName": "value4",
+      "label": "value4",
+      "placeholder": "value4",
+      "required": true,
+      "options": [
+        {
+          "value": "option1",
+          "label": "label1"
+        },
+        {
+          "value": "option2",
+          "label": "label2"
+        }
+      ],
+      "option-label": "label",
+      "option-value": "value",
+      "autocomplete": false,
+      "multiple": false,
+      "select-all": false,
+      "collapse-chips": false,
+      "closable-chips": false
+    }
+  ],
+  [
+    {
+      "component": "vn-radio-set",
+      "propertyName": "value5",
+      "label": "value5",
+      "placeholder": "value5",
+      "required": true,
+      "options": [
+        "option1",
+        "option2"
+      ],
+      "column": false
+    }
+  ],
+  [
+    {
+      "component": "vn-radio-set",
+      "propertyName": "value6",
+      "label": "value6",
+      "placeholder": "value6",
+      "required": true,
+      "options": [
+        {
+          "value": "option1",
+          "label": "label1"
+        },
+        {
+          "value": "option2",
+          "label": "label2"
+        }
+      ],
+      "option-label": "label",
+      "option-value": "value",
+      "column": false
+    }
+  ],
+  [
+    {
+      "component": "vn-date-range-picker",
+      "propertyName": "value7",
+      "label": "value7",
+      "placeholder": "value7",
+      "required": true
+    }
+  ],
+  [
+    {
+      "component": "vn-date-time-picker",
+      "propertyName": "value8",
+      "label": "value8",
+      "placeholder": "value8",
+      "required": true
+    }
+  ],
+  [
+    {
+      "component": "vn-multi-string",
+      "propertyName": "value9",
+      "label": "value9",
+      "placeholder": "value9",
+      "required": true,
+      "delimeter": "",
+      "max": null,
+      "no-chips": true,
+      "copy": true
+    }
+  ],
+  [
+    {
+      "component": "vn-multi-string",
+      "propertyName": "value10",
+      "label": "value10",
+      "placeholder": "value10",
+      "required": true,
+      "delimeter": "",
+      "max": 1000,
+      "no-chips": false,
+      "copy": true
+    }
+  ],
+  [
+    {
+      "component": "vn-text-area",
+      "propertyName": "value11",
+      "label": "value11",
+      "placeholder": "value11",
+      "required": true,
+      "min": 0,
+      "max": 1000
+    }
+  ],
+  [
+    {
+      "component": "vn-json-editor",
+      "propertyName": "value12",
+      "label": "value12",
+      "placeholder": "value12",
+      "required": true,
+      "height": "1000"
+    }
+  ]
+]

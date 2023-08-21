@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package tests;
+
+import "options.proto";
+
+option go_package = "github.com/sample";
+
+option (pubg.vlossom.file) = {entrypointMessage: "Values"};
+
+message Values {
+  option (pubg.vlossom.message) = {expose: true};
+
+  // Single Message
+  int32 value1 = 1 [(pubg.vlossom.field) = {messages: {text: "msg1"}}];
+
+  // Multiple Messages
+  string value2 = 2 [(pubg.vlossom.field) = {
+    messages: {text: "msg2"},
+    messages: {text: "msg3"},
+    messages: {text: "msg4"},
+  }];
+
+  // Single Message with state
+  bool value3 = 3 [(pubg.vlossom.field) = {
+    messages: {text: "msg2", state: primary},
+  }];
+
+  // Multiple Messages with  state
+  float value4 = 4 [(pubg.vlossom.field) = {
+    messages: {text: "msg1", state: primary},
+    messages: {text: "msg2", state: info},
+    messages: {text: "msg3", state: success},
+    messages: {text: "msg4", state: warn},
+    messages: {text: "msg5", state: idle},
+  }];
+}

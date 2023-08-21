@@ -4,7 +4,7 @@ package schema;
 
 import "options.proto";
 
-option go_package = "github.com/vlossom/protoc-gen-vlossom/example/schema";
+option go_package = "github.com/pubg/protoc-gen-vlossom/example/schema";
 
 option (pubg.vlossom.file) = {expose: true, entrypointMessage: "Values"};
 
@@ -16,7 +16,11 @@ message FirstForm {
   string name = 1 [(pubg.vlossom.field) = {component: Input, input: {type: text, max: 10}}];
   SecondMessage second_message = 2 [(pubg.vlossom.field).expose = true];
   MyEnum my_enum = 3;
-  map<string, string> mymap = 4;
+  map<string, string> mymap = 4 [(pubg.vlossom.field) = {json_editor: {height: 10}}];
+
+  string v1 = 5  [(pubg.vlossom.field) = {default_string: "BAR", grid: {order: 0}}];
+  int32 v2 = 6  [(pubg.vlossom.field) = {default_integer: 123, grid: {order: 1}}];
+  double v3 = 7  [(pubg.vlossom.field)= {default_float: 583, messages: {state: success, text: "Success"}, messages: {state: info, text: "Info"}}];
 }
 
 message SecondMessage {

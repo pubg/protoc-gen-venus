@@ -1,0 +1,9 @@
+name: "Scala Test: Enum"
+description: "Scala Enum Test"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+  Test all Enum field options
+

@@ -18,10 +18,10 @@ func buildFromInputOptions(option *protooptions.InputOptions, defaultType string
 		component.Type = option.GetType().String()
 	}
 	if option.Min != nil {
-		component.Min = toIntP(option.GetMin())
+		component.Min = intP(option.Min)
 	}
 	if option.Max != nil {
-		component.Max = toIntP(option.GetMax())
+		component.Max = intP(option.Max)
 	}
 	return component
 }
@@ -34,7 +34,7 @@ func buildFromMultiStringOptions(option *protooptions.MultiStringOptions, base v
 
 	component.Delimeter = option.GetDelimeter()
 	if option.Max != nil {
-		component.Max = toIntP(option.GetMax())
+		component.Max = intP(option.Max)
 	}
 	component.NoChips = option.GetNoChips()
 	component.Copy = option.GetCopy()
@@ -54,7 +54,7 @@ func buildFromSelectOptions(option *protooptions.SelectOptions, selectOptions *v
 	component.CollapseChips = option.GetCollapseChips()
 	component.ClosableChips = option.GetClosableChips()
 	if option.InfiniteLoad != nil {
-		component.InfiniteLoad = toIntP(option.GetInfiniteLoad())
+		component.InfiniteLoad = intP(option.InfiniteLoad)
 	}
 	return component
 }
@@ -76,10 +76,10 @@ func buildFromTextAreaOptions(option *protooptions.TextAreaOptions, base vlossom
 	}
 
 	if option.Min != nil {
-		component.Min = toIntP(option.GetMin())
+		component.Min = intP(option.Min)
 	}
 	if option.Max != nil {
-		component.Max = toIntP(option.GetMax())
+		component.Max = intP(option.Max)
 	}
 	return component
 }
@@ -91,7 +91,7 @@ func buildFromJsonEditorOptions(option *protooptions.JsonEditorOptions, base vlo
 	}
 
 	if option.Height != nil {
-		component.Height = fmt.Sprintf("%dpx", option.GetHeight())
+		component.Height = fmt.Sprintf("%d", option.GetHeight())
 	}
 	return component
 }
@@ -117,11 +117,6 @@ func buildFromRadioSetOptions(option *protooptions.RadioSetOptions, selectOption
 
 	component.Column = option.GetColumn()
 	return component
-}
-
-func toIntP(i int32) *int {
-	ii := int(i)
-	return &ii
 }
 
 func convertToVlossomOptions(protoOptions *protooptions.VlossomOptions) *vlossom.VlossomOptions {

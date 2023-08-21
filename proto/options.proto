@@ -24,15 +24,22 @@ message MessageOptions {
 message FieldOptions {
   optional bool expose = 1;
   string property = 2;
-  oneof width {
-    int32 rem = 3;
-    int32 lg = 4;
+  string label = 3;
+  string placeholder = 4;
+  State state = 5;
+  repeated Message messages = 6;
+  oneof Size {
+    Grid grid = 7;
+    int32 rem = 8;
   }
-  string label = 5;
-  string placeholder = 6;
-  State state = 7;
-  ComponentType component = 8;
 
+  oneof default_value {
+    string default_string = 10;
+    int64 default_integer = 11;
+    double default_float = 12;
+  }
+
+  ComponentType component = 20;
   oneof Options {
     InputOptions input = 21;
     MultiStringOptions multi_string = 22;
@@ -45,6 +52,11 @@ message FieldOptions {
   }
 }
 
+message Message {
+  State state = 1; // optional
+  string text = 2; // required
+}
+
 enum State {
   unspecified = 0;
   primary = 1;
@@ -52,6 +64,16 @@ enum State {
   success = 3;
   warn = 4;
   idle = 5;
+}
+
+message Grid {
+  optional int32 sm = 1;
+  optional int32 md = 2;
+  optional int32 lg = 3;
+  optional int32 sm_offset = 4;
+  optional int32 md_offset = 5;
+  optional int32 lg_offset = 6;
+  optional int32 order = 7;
 }
 
 enum ComponentType {

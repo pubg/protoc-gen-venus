@@ -1,4 +1,4 @@
-name: "Property Name Override"
+name: "Base Component: Property Name"
 description: "Test for property name override"
 requestFile: "request.pb.bin"
 expectResultFile: "entry.vlossom.json"

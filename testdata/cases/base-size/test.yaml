@@ -1,0 +1,13 @@
+name: "Base Component: Size"
+description: "Test for grid or rem"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+  if grid exists:
+    if grid is partially provided:
+      set grid to provided
+  
+  if rem exists:
+    set width to provided value printf("%drem", $rem)

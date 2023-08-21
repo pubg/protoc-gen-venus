@@ -24,6 +24,7 @@ type Testcase struct {
 	RequestFile        string `json:"requestFile"`
 	ExpectResultFile   string `json:"expectResultFile"`
 	ExpectResultIsNull bool   `json:"expectResultIsNull"`
+	//ExpectResultIsError bool   `json:"expectResultIsError"`
 }
 
 func TestPlugin(t *testing.T) {
@@ -42,18 +43,28 @@ func TestPlugin(t *testing.T) {
 			response, err := toGenerateResponse(testRequest, &protooptions.PluginOptions{
 				ExposeAll:        &[]bool{false}[0],
 				OutputFileSuffix: &[]string{".vlossom.json"}[0],
+				PrettyOutput:     &[]bool{false}[0],
 			})
 			if err != nil {
 				t.Fatal(err)
 			}
 
+			if testcase.ExpectResultIsNull {
+				if len(response.File) != 0 {
+					t.Errorf("response should be empty, but got %d", len(response.File))
+				}
+				return
+			}
+
 			if len(response.File) != 1 {
-				t.Fatalf("response should contain 1 file, but got %d", len(response.File))
+				t.Errorf("response should contain 1 file, but got %d", len(response.File))
+				return
 			}
 
 			actuals, err := toComparableComponent([]byte(*response.File[0].Content))
 			if err != nil {
-				t.Fatal(err)
+				t.Errorf(err.Error())
+				return
 			}
 			for index, expect := range expectedResult {
 				require.Equal(t, expect, actuals[index], "not equals at index %s: %s", testcase.Name, testcase.Description)
@@ -68,7 +79,7 @@ func readTestCase(parentDir string, dir os.DirEntry) (*Testcase, *pluginpb.CodeG
 	}
 
 	path := filepath.Join(parentDir, dir.Name())
-	testcase, err := readTestCase0(filepath.Join(path, "testcase.yaml"))
+	testcase, err := readTestCase0(filepath.Join(path, "test.yaml"))
 	if err != nil {
 		return nil, nil, nil, err
 	}

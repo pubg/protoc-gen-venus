@@ -1,0 +1,14 @@
+name: "Base Component: Messages"
+description: "Test for Messages"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+  set messages to provided
+  
+  if messages are repeated:
+    set messages multiple times
+  
+  if `state` not exist:
+    do nothing to `state` field

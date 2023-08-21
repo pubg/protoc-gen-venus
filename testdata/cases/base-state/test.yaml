@@ -1,0 +1,16 @@
+name: "Base Component: State"
+description: "Test for State field"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.vlossom.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+  if state not exist:
+    do nothing
+  
+  if state exist:
+    set state to provided
+  
+  if state is unspecified:
+    do nothing
+
