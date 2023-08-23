@@ -7,7 +7,7 @@ import "options.proto";
 option go_package = "github.com/sample";
 
 message ValuesProto2 {
-  option (pubg.vlossom.message) = {expose: true};
+  option (pubg.venus.message) = {expose: true};
 
   optional int32 value1 = 1;
   required string value2 = 2;

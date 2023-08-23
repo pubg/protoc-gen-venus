@@ -6,26 +6,26 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (pubg.vlossom.file) = {entrypointMessage: "Values"};
+option (pubg.venus.file) = {entrypointMessage: "Values"};
 
 message Values {
-  option (pubg.vlossom.message) = {expose: true};
+  option (pubg.venus.message) = {expose: true};
 
   // Grid defined but none of the other options
-  int32 value1 = 1 [(pubg.vlossom.field) = {grid: {}}];
+  int32 value1 = 1 [(pubg.venus.field) = {grid: {}}];
 
   // Rem defined
-  string value2 = 2 [(pubg.vlossom.field) = {rem: 1}];
+  string value2 = 2 [(pubg.venus.field) = {rem: 1}];
 
   // Grid defined and single option provided
-  bool value3 = 3 [(pubg.vlossom.field) = {grid: {lg: 2}}];
-  float value4 = 4 [(pubg.vlossom.field) = {grid: {sm: 3}}];
-  double value5 = 5 [(pubg.vlossom.field) = {grid: {md: 4}}];
-  bool value6 = 6 [(pubg.vlossom.field) = {grid: {lg_offset: 5}}];
-  float value7 = 7 [(pubg.vlossom.field) = {grid: {sm_offset: 6}}];
-  double value8 = 8 [(pubg.vlossom.field) = {grid: {md_offset: 7}}];
-  string value9 = 9 [(pubg.vlossom.field) = {grid: {order: 8}}];
+  bool value3 = 3 [(pubg.venus.field) = {grid: {lg: 2}}];
+  float value4 = 4 [(pubg.venus.field) = {grid: {sm: 3}}];
+  double value5 = 5 [(pubg.venus.field) = {grid: {md: 4}}];
+  bool value6 = 6 [(pubg.venus.field) = {grid: {lg_offset: 5}}];
+  float value7 = 7 [(pubg.venus.field) = {grid: {sm_offset: 6}}];
+  double value8 = 8 [(pubg.venus.field) = {grid: {md_offset: 7}}];
+  string value9 = 9 [(pubg.venus.field) = {grid: {order: 8}}];
 
   // Grid defined and all options provided
-  int32 value10 = 10 [(pubg.vlossom.field) = {grid: {lg: 2, sm: 3, md: 4, lg_offset: 5, sm_offset: 6, md_offset: 7, order: 8}}];
+  int32 value10 = 10 [(pubg.venus.field) = {grid: {lg: 2, sm: 3, md: 4, lg_offset: 5, sm_offset: 6, md_offset: 7, order: 8}}];
 }

@@ -1,7 +1,7 @@
 name: "Scala Test: Enum"
 description: "Scala Enum Test"
 requestFile: "request.pb.bin"
-expectResultFile: "entry.vlossom.json"
+expectResultFile: "entry.venus.json"
 expectResultIsNull: false
 
 expectedBehavior: |

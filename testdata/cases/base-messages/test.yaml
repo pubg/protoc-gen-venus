@@ -1,7 +1,7 @@
 name: "Base Component: Messages"
 description: "Test for Messages"
 requestFile: "request.pb.bin"
-expectResultFile: "entry.vlossom.json"
+expectResultFile: "entry.venus.json"
 expectResultIsNull: false
 
 expectedBehavior: |

@@ -6,12 +6,12 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (pubg.vlossom.file) = {entrypointMessage: "Values", expose: true};
+option (pubg.venus.file) = {entrypointMessage: "Values", expose: true};
 
 message Values {
   // Default Options
   map<string, string> value1 = 1;
 
   // Full Options
-  map<string, string> value2 = 2 [(pubg.vlossom.field) = {json_editor: {height: 300}}];
+  map<string, string> value2 = 2 [(pubg.venus.field) = {json_editor: {height: 300}}];
 }

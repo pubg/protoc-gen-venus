@@ -6,28 +6,28 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (pubg.vlossom.file) = {entrypointMessage: "Values"};
+option (pubg.venus.file) = {entrypointMessage: "Values"};
 
 message Values {
-  option (pubg.vlossom.message) = {expose: true};
+  option (pubg.venus.message) = {expose: true};
 
   // Single Message
-  int32 value1 = 1 [(pubg.vlossom.field) = {messages: {text: "msg1"}}];
+  int32 value1 = 1 [(pubg.venus.field) = {messages: {text: "msg1"}}];
 
   // Multiple Messages
-  string value2 = 2 [(pubg.vlossom.field) = {
+  string value2 = 2 [(pubg.venus.field) = {
     messages: {text: "msg2"},
     messages: {text: "msg3"},
     messages: {text: "msg4"},
   }];
 
   // Single Message with state
-  bool value3 = 3 [(pubg.vlossom.field) = {
+  bool value3 = 3 [(pubg.venus.field) = {
     messages: {text: "msg2", state: primary},
   }];
 
   // Multiple Messages with  state
-  float value4 = 4 [(pubg.vlossom.field) = {
+  float value4 = 4 [(pubg.venus.field) = {
     messages: {text: "msg1", state: primary},
     messages: {text: "msg2", state: info},
     messages: {text: "msg3", state: success},

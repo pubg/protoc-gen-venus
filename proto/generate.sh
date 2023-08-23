@@ -5,7 +5,7 @@ set -eux
 cd $(dirname $0)
 
 protoc \
---go_out=../generator/protooptions \
+--go_out=../generator/protoptions \
 --go_opt=paths=source_relative \
 -I ./ \
 ./*.proto

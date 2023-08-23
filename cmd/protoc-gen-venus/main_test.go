@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/pubg/protoc-gen-vlossom/generator"
-	"github.com/pubg/protoc-gen-vlossom/generator/protooptions"
+	"github.com/pubg/protoc-gen-venus/generator"
+	"github.com/pubg/protoc-gen-venus/generator/protoptions"
 	"k8s.io/apimachinery/pkg/util/yaml"
 
 	"github.com/samber/lo"
@@ -40,9 +40,9 @@ func TestPlugin(t *testing.T) {
 		}
 
 		t.Run(testcase.Name, func(t *testing.T) {
-			response, err := toGenerateResponse(testRequest, &protooptions.PluginOptions{
+			response, err := toGenerateResponse(testRequest, &protoptions.PluginOptions{
 				ExposeAll:        &[]bool{false}[0],
-				OutputFileSuffix: &[]string{".vlossom.json"}[0],
+				OutputFileSuffix: &[]string{".venus.json"}[0],
 				PrettyOutput:     &[]bool{false}[0],
 			})
 			if err != nil {
@@ -93,7 +93,7 @@ func readTestCase(parentDir string, dir os.DirEntry) (*Testcase, *pluginpb.CodeG
 		return testcase, request, nil, nil
 	}
 
-	result, err := readVlossomResult(filepath.Join(path, testcase.ExpectResultFile))
+	result, err := readVenusResult(filepath.Join(path, testcase.ExpectResultFile))
 	if err != nil {
 		return nil, nil, nil, err
 	}
@@ -124,7 +124,7 @@ func readGeneratorRequest(path string) (*pluginpb.CodeGeneratorRequest, error) {
 	return req, nil
 }
 
-func readVlossomResult(path string) ([]any, error) {
+func readVenusResult(path string) ([]any, error) {
 	buf, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ func readVlossomResult(path string) ([]any, error) {
 	return toComparableComponent(buf)
 }
 
-func toGenerateResponse(request *pluginpb.CodeGeneratorRequest, options *protooptions.PluginOptions) (*pluginpb.CodeGeneratorResponse, error) {
+func toGenerateResponse(request *pluginpb.CodeGeneratorRequest, options *protoptions.PluginOptions) (*pluginpb.CodeGeneratorResponse, error) {
 	opts := protogen.Options{}
 
 	plugin, err := opts.New(request)
@@ -140,7 +140,7 @@ func toGenerateResponse(request *pluginpb.CodeGeneratorRequest, options *protoop
 		return nil, err
 	}
 
-	err = generator.NewVlossomGenerator(plugin, options).Run()
+	err = generator.NewVenusGenerator(plugin, options).Run()
 	if err != nil {
 		return nil, err
 	}

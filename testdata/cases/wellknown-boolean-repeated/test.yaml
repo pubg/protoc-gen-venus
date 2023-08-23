@@ -1,7 +1,7 @@
 name: "WellKnown Test: Boolean Repeated"
 description: "WellKnown Boolean Repeated Test"
 requestFile: "request.pb.bin"
-expectResultFile: "entry.vlossom.json"
+expectResultFile: "entry.venus.json"
 expectResultIsNull: false
 
 expectedBehavior: |

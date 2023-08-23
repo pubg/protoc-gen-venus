@@ -2,9 +2,9 @@ before:
   hooks:
     - go mod tidy
 builds:
-  - id: protoc-gen-vlossom
-    main: cmd/protoc-gen-vlossom/main.go
-    binary: protoc-gen-vlossom
+  - id: protoc-gen-venus
+    main: cmd/protoc-gen-venus/main.go
+    binary: protoc-gen-venus
     env:
       - CGO_ENABLED=0
     ldflags:
@@ -19,11 +19,11 @@ builds:
     goarm:
       - 8
 archives:
-  - id: protoc-gen-vlossom-archive
+  - id: protoc-gen-venus-archive
     name_template: |-
-      protoc-gen-vlossom_{{ .Tag }}_{{ .Os }}_{{ .Arch -}}
+      protoc-gen-venus_{{ .Tag }}_{{ .Os }}_{{ .Arch -}}
     builds:
-      - protoc-gen-vlossom
+      - protoc-gen-venus
     format_overrides:
       - goos: windows
         format: zip

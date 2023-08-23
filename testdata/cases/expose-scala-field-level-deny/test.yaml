@@ -1,7 +1,7 @@
 name: "Expose Test: Scala Field Level Deny"
 description: "Expose Scala Field Level Deny"
 requestFile: "request.pb.bin"
-expectResultFile: "entry.vlossom.json"
+expectResultFile: "entry.venus.json"
 expectResultIsNull: false
 
 expectedBehavior: |

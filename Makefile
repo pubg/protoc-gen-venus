@@ -2,4 +2,4 @@ test:
 	go test ./... -v
 
 install:
-	go install cmd/protoc-gen-vlossom/main.go
+	go install cmd/protoc-gen-venus/main.go

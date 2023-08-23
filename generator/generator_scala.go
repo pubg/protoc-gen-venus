@@ -3,15 +3,14 @@ package generator
 import (
 	"fmt"
 
-	"github.com/pubg/protoc-gen-vlossom/generator/protooptions"
-	"github.com/pubg/protoc-gen-vlossom/generator/vlossom"
-
+	"github.com/pubg/protoc-gen-venus/generator/protoptions"
+	"github.com/pubg/protoc-gen-venus/generator/venus"
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-func (g *VlossomGenerator) concreteBaseComponentOptions(ctx *HierarchicalContext, fd protoreflect.FieldDescriptor, fo *protooptions.FieldOptions) vlossom.BaseComponentOptions {
-	base := vlossom.BaseComponentOptions{}
+func (g *VenusGenerator) concreteBaseComponentOptions(ctx *HierarchicalContext, fd protoreflect.FieldDescriptor, fo *protoptions.FieldOptions) venus.BaseComponentOptions {
+	base := venus.BaseComponentOptions{}
 	base.PropertyName = ctx.PropertiesString()
 	base.Required = !fd.HasOptionalKeyword()
 
@@ -30,15 +29,15 @@ func (g *VlossomGenerator) concreteBaseComponentOptions(ctx *HierarchicalContext
 	}
 
 	// Fill State, State는 inference를 제공하지 않는다.
-	if fo.GetState() != protooptions.State_unspecified {
+	if fo.GetState() != protoptions.State_unspecified {
 		base.State = fo.GetState().String()
 	}
 
 	// Fill Messages
 	for _, message := range fo.GetMessages() {
-		vMessage := vlossom.Message{}
+		vMessage := venus.Message{}
 		vMessage.Text = message.GetText()
-		if message.GetState() != protooptions.State_unspecified {
+		if message.GetState() != protoptions.State_unspecified {
 			vMessage.State = message.GetState().String()
 		}
 		base.Messages = append(base.Messages, vMessage)
@@ -46,9 +45,9 @@ func (g *VlossomGenerator) concreteBaseComponentOptions(ctx *HierarchicalContext
 
 	// Fill Grid or Width(rem)
 	switch size := fo.GetSize().(type) {
-	case *protooptions.FieldOptions_Grid:
+	case *protoptions.FieldOptions_Grid:
 		grid := size.Grid
-		base.Grid = &vlossom.Grid{
+		base.Grid = &venus.Grid{
 			Sm:       intP(grid.Md),
 			Md:       intP(grid.Md),
 			Lg:       intP(grid.Lg),
@@ -57,31 +56,31 @@ func (g *VlossomGenerator) concreteBaseComponentOptions(ctx *HierarchicalContext
 			LgOffset: intP(grid.LgOffset),
 			Order:    intP(grid.Order),
 		}
-	case *protooptions.FieldOptions_Rem:
+	case *protoptions.FieldOptions_Rem:
 		base.Width = fmt.Sprintf("%drem", size.Rem)
 	}
 
 	// Fill DefaultValue
 	switch defaultValue := fo.GetDefaultValue().(type) {
-	case *protooptions.FieldOptions_DefaultString:
+	case *protoptions.FieldOptions_DefaultString:
 		base.DefaultValue = defaultValue.DefaultString
-	case *protooptions.FieldOptions_DefaultInteger:
+	case *protoptions.FieldOptions_DefaultInteger:
 		base.DefaultValue = defaultValue.DefaultInteger
-	case *protooptions.FieldOptions_DefaultFloat:
+	case *protoptions.FieldOptions_DefaultFloat:
 		base.DefaultValue = defaultValue.DefaultFloat
 	}
 	return base
 }
 
-func (g *VlossomGenerator) buildFromScalaField(ctx *HierarchicalContext, field *protogen.Field) (vlossom.Component, error) {
+func (g *VenusGenerator) buildFromScalaField(ctx *HierarchicalContext, field *protogen.Field) (venus.Component, error) {
 	fd := field.Desc
-	fo := protooptions.GetFieldOptions(fd)
+	fo := protoptions.GetFieldOptions(fd)
 
 	base := g.concreteBaseComponentOptions(ctx, fd, fo)
 
 	scalaKind := ToScalaKind(fd)
-	var componentType protooptions.ComponentType
-	if fo.GetComponent() != protooptions.ComponentType_Inference {
+	var componentType protoptions.ComponentType
+	if fo.GetComponent() != protoptions.ComponentType_Inference {
 		componentType = fo.GetComponent()
 	} else {
 		componentType = scalaKind.defaultComponent
@@ -100,63 +99,63 @@ func (g *VlossomGenerator) buildFromScalaField(ctx *HierarchicalContext, field *
 	return nil, fmt.Errorf("unknown scala kind")
 }
 
-func (g *VlossomGenerator) buildFromNumberField(field *protogen.Field, componentType protooptions.ComponentType, base vlossom.BaseComponentOptions) (vlossom.Component, error) {
-	fo := protooptions.GetFieldOptions(field.Desc)
+func (g *VenusGenerator) buildFromNumberField(field *protogen.Field, componentType protoptions.ComponentType, base venus.BaseComponentOptions) (venus.Component, error) {
+	fo := protoptions.GetFieldOptions(field.Desc)
 	switch componentType {
-	case protooptions.ComponentType_Input:
-		return buildFromInputOptions(fo.GetInput(), protooptions.InputOptions_number.String(), base), nil
+	case protoptions.ComponentType_Input:
+		return buildFromInputOptions(fo.GetInput(), protoptions.InputOptions_number.String(), base), nil
 	}
 	return nil, fmt.Errorf("failed buildFromNumberField, unknown component type: %s", componentType)
 }
 
-func (g *VlossomGenerator) buildFromStringField(field *protogen.Field, componentType protooptions.ComponentType, base vlossom.BaseComponentOptions) (vlossom.Component, error) {
-	fo := protooptions.GetFieldOptions(field.Desc)
+func (g *VenusGenerator) buildFromStringField(field *protogen.Field, componentType protoptions.ComponentType, base venus.BaseComponentOptions) (venus.Component, error) {
+	fo := protoptions.GetFieldOptions(field.Desc)
 	switch componentType {
-	case protooptions.ComponentType_Input:
-		return buildFromInputOptions(fo.GetInput(), protooptions.InputOptions_text.String(), base), nil
-	case protooptions.ComponentType_Select:
+	case protoptions.ComponentType_Input:
+		return buildFromInputOptions(fo.GetInput(), protoptions.InputOptions_text.String(), base), nil
+	case protoptions.ComponentType_Select:
 		if fo.GetSelect() == nil {
 			return nil, fmt.Errorf("failed buildFromStringField, select options is nil")
 		}
-		return buildFromSelectOptions(fo.GetSelect(), convertToVlossomOptions(fo.GetSelect().GetOptions()), base), nil
-	case protooptions.ComponentType_RadioSet:
+		return buildFromSelectOptions(fo.GetSelect(), convertToVenusOptions(fo.GetSelect().GetOptions()), base), nil
+	case protoptions.ComponentType_RadioSet:
 		if fo.GetRadioSet() == nil {
 			return nil, fmt.Errorf("failed buildFromStringField, select options is nil")
 		}
-		return buildFromRadioSetOptions(fo.GetRadioSet(), convertToVlossomOptions(fo.GetRadioSet().GetOptions()), base), nil
-	case protooptions.ComponentType_DateRangePicker:
-		return vlossom.NewDateRangePicker(base), nil
-	case protooptions.ComponentType_DateTimePicker:
-		return vlossom.NewDateTimePicker(base), nil
-	case protooptions.ComponentType_MultiString:
+		return buildFromRadioSetOptions(fo.GetRadioSet(), convertToVenusOptions(fo.GetRadioSet().GetOptions()), base), nil
+	case protoptions.ComponentType_DateRangePicker:
+		return venus.NewDateRangePicker(base), nil
+	case protoptions.ComponentType_DateTimePicker:
+		return venus.NewDateTimePicker(base), nil
+	case protoptions.ComponentType_MultiString:
 		return buildFromMultiStringOptions(fo.GetMultiString(), base), nil
-	case protooptions.ComponentType_TextArea:
+	case protoptions.ComponentType_TextArea:
 		return buildFromTextAreaOptions(fo.GetTextArea(), base), nil
-	case protooptions.ComponentType_JsonEditor:
+	case protoptions.ComponentType_JsonEditor:
 		return buildFromJsonEditorOptions(fo.GetJsonEditor(), base), nil
 	}
 	return nil, fmt.Errorf("failed buildFromStringField, unknown component type: %s", componentType)
 }
 
-func (g *VlossomGenerator) buildFromEnumField(field *protogen.Field, componentType protooptions.ComponentType, base vlossom.BaseComponentOptions) (vlossom.Component, error) {
+func (g *VenusGenerator) buildFromEnumField(field *protogen.Field, componentType protoptions.ComponentType, base venus.BaseComponentOptions) (venus.Component, error) {
 	fd := field.Desc
-	fo := protooptions.GetFieldOptions(fd)
+	fo := protoptions.GetFieldOptions(fd)
 	ed := fd.Enum()
-	_ = protooptions.GetEnumOptions(ed)
+	_ = protoptions.GetEnumOptions(ed)
 	values := ed.Values()
 
-	selectOptions := &vlossom.VlossomOptions{}
-	var labeledOptions []vlossom.LabeledOption
+	selectOptions := &venus.VenusOptions{}
+	var labeledOptions []venus.LabeledOption
 	for i := 0; i < values.Len(); i++ {
 		vd := values.Get(i)
-		vo := protooptions.GetEnumValueOptions(vd)
+		vo := protoptions.GetEnumValueOptions(vd)
 
-		labeledOption := vlossom.LabeledOption{Label: string(vd.Name())}
-		if x, ok := vo.GetValue().(*protooptions.EnumValueOptions_String_); ok {
+		labeledOption := venus.LabeledOption{Label: string(vd.Name())}
+		if x, ok := vo.GetValue().(*protoptions.EnumValueOptions_String_); ok {
 			labeledOption.Value = x.String_
-		} else if x, ok := vo.GetValue().(*protooptions.EnumValueOptions_Integer); ok {
+		} else if x, ok := vo.GetValue().(*protoptions.EnumValueOptions_Integer); ok {
 			labeledOption.Value = x.Integer
-		} else if x, ok := vo.GetValue().(*protooptions.EnumValueOptions_Float); ok {
+		} else if x, ok := vo.GetValue().(*protoptions.EnumValueOptions_Float); ok {
 			labeledOption.Value = x.Float
 		} else {
 			labeledOption.Value = vd.Name()
@@ -166,45 +165,45 @@ func (g *VlossomGenerator) buildFromEnumField(field *protogen.Field, componentTy
 	selectOptions.SetLabeledOptions(labeledOptions)
 
 	switch componentType {
-	case protooptions.ComponentType_Select:
+	case protoptions.ComponentType_Select:
 		return buildFromSelectOptions(fo.GetSelect(), selectOptions, base), nil
-	case protooptions.ComponentType_RadioSet:
+	case protoptions.ComponentType_RadioSet:
 		return buildFromRadioSetOptions(fo.GetRadioSet(), selectOptions, base), nil
 	}
 	return nil, fmt.Errorf("failed buildFromEnumField, unknown component type: %s", componentType)
 }
 
-func (g *VlossomGenerator) buildFromBooleanField(field *protogen.Field, componentType protooptions.ComponentType, base vlossom.BaseComponentOptions) (vlossom.Component, error) {
+func (g *VenusGenerator) buildFromBooleanField(field *protogen.Field, componentType protoptions.ComponentType, base venus.BaseComponentOptions) (venus.Component, error) {
 	switch componentType {
-	case protooptions.ComponentType_Checkbox:
-		return vlossom.NewCheckbox(base), nil
-	case protooptions.ComponentType_Switch:
-		return vlossom.NewSwitch(base), nil
+	case protoptions.ComponentType_Checkbox:
+		return venus.NewCheckbox(base), nil
+	case protoptions.ComponentType_Switch:
+		return venus.NewSwitch(base), nil
 	}
 	return nil, fmt.Errorf("failed buildFromBooleanField, unknown component type: %s", componentType)
 }
 
 type ScalaKind struct {
 	kind             string
-	defaultComponent protooptions.ComponentType
+	defaultComponent protoptions.ComponentType
 }
 
 var (
 	StringKind = ScalaKind{
 		kind:             "string",
-		defaultComponent: protooptions.ComponentType_Input,
+		defaultComponent: protoptions.ComponentType_Input,
 	}
 	NumberKind = ScalaKind{
 		kind:             "number",
-		defaultComponent: protooptions.ComponentType_Input,
+		defaultComponent: protoptions.ComponentType_Input,
 	}
 	BooleanKind = ScalaKind{
 		kind:             "boolean",
-		defaultComponent: protooptions.ComponentType_Checkbox,
+		defaultComponent: protoptions.ComponentType_Checkbox,
 	}
 	EnumKind = ScalaKind{
 		kind:             "enum",
-		defaultComponent: protooptions.ComponentType_Select,
+		defaultComponent: protoptions.ComponentType_Select,
 	}
 )
 

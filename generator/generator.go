@@ -5,24 +5,23 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/pubg/protoc-gen-vlossom/generator/protooptions"
-	"github.com/pubg/protoc-gen-vlossom/generator/vlossom"
-
+	"github.com/pubg/protoc-gen-venus/generator/protoptions"
+	"github.com/pubg/protoc-gen-venus/generator/venus"
 	"github.com/samber/lo"
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-type VlossomGenerator struct {
+type VenusGenerator struct {
 	plugin  *protogen.Plugin
-	options *protooptions.PluginOptions
+	options *protoptions.PluginOptions
 }
 
-func NewVlossomGenerator(plugin *protogen.Plugin, options *protooptions.PluginOptions) *VlossomGenerator {
-	return &VlossomGenerator{plugin: plugin, options: options}
+func NewVenusGenerator(plugin *protogen.Plugin, options *protoptions.PluginOptions) *VenusGenerator {
+	return &VenusGenerator{plugin: plugin, options: options}
 }
 
-func (g *VlossomGenerator) Run() error {
+func (g *VenusGenerator) Run() error {
 	ctx := NewHierarchicalContext()
 	if *g.options.ExposeAll {
 		ctx.AppendExpose(g.options.ExposeAll)
@@ -56,9 +55,9 @@ func (g *VlossomGenerator) Run() error {
 	return nil
 }
 
-func (g *VlossomGenerator) buildFromFile(ctx *HierarchicalContext, file *protogen.File) ([]vlossom.Component, error) {
+func (g *VenusGenerator) buildFromFile(ctx *HierarchicalContext, file *protogen.File) ([]venus.Component, error) {
 	fd := file.Desc
-	fo := protooptions.GetFileOptions(fd)
+	fo := protoptions.GetFileOptions(fd)
 	if fo == nil {
 		return nil, fmt.Errorf("FileOption must be set, File: %s", fd.Path())
 	}
@@ -75,16 +74,16 @@ func (g *VlossomGenerator) buildFromFile(ctx *HierarchicalContext, file *protoge
 	return g.buildFromMessage(ctx, message)
 }
 
-func (g *VlossomGenerator) buildFromMessage(ctx *HierarchicalContext, message *protogen.Message) ([]vlossom.Component, error) {
+func (g *VenusGenerator) buildFromMessage(ctx *HierarchicalContext, message *protogen.Message) ([]venus.Component, error) {
 	md := message.Desc
-	mo := protooptions.GetMessageOptions(md)
+	mo := protoptions.GetMessageOptions(md)
 
 	ctx = NewFromHierarchicalContext(ctx)
 	if mo != nil {
 		ctx.AppendExpose(mo.Expose)
 	}
 
-	var resukt []vlossom.Component
+	var resukt []venus.Component
 	for _, field := range message.Fields {
 		nestedComponents, err := g.buildFromField(ctx, field)
 		if err != nil {
@@ -95,9 +94,9 @@ func (g *VlossomGenerator) buildFromMessage(ctx *HierarchicalContext, message *p
 	return resukt, nil
 }
 
-func (g *VlossomGenerator) buildFromField(ctx *HierarchicalContext, field *protogen.Field) ([]vlossom.Component, error) {
+func (g *VenusGenerator) buildFromField(ctx *HierarchicalContext, field *protogen.Field) ([]venus.Component, error) {
 	fd := field.Desc
-	fo := protooptions.GetFieldOptions(fd)
+	fo := protoptions.GetFieldOptions(fd)
 
 	ctx = NewFromHierarchicalContext(ctx)
 	if fo != nil {
@@ -120,7 +119,7 @@ func (g *VlossomGenerator) buildFromField(ctx *HierarchicalContext, field *proto
 		if err != nil {
 			return nil, err
 		}
-		return []vlossom.Component{component}, nil
+		return []venus.Component{component}, nil
 	}
 
 	// Repeated Types
@@ -144,13 +143,13 @@ func (g *VlossomGenerator) buildFromField(ctx *HierarchicalContext, field *proto
 	if err != nil {
 		return nil, err
 	}
-	return []vlossom.Component{component}, nil
+	return []venus.Component{component}, nil
 }
 
-func (g *VlossomGenerator) generateToJson(components []vlossom.Component) ([]byte, error) {
-	var transformed [][]vlossom.Component
+func (g *VenusGenerator) generateToJson(components []venus.Component) ([]byte, error) {
+	var transformed [][]venus.Component
 	for _, component := range components {
-		transformed = append(transformed, []vlossom.Component{component})
+		transformed = append(transformed, []venus.Component{component})
 	}
 	if *g.options.PrettyOutput {
 		return json.MarshalIndent(transformed, "", "  ")

@@ -6,14 +6,14 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (pubg.vlossom.file) = {entrypointMessage: "Values", expose: true};
+option (pubg.venus.file) = {entrypointMessage: "Values", expose: true};
 
 message Values {
   // Default Options
-  string value1 = 1 [(pubg.vlossom.field) = {component:Inference}];
+  string value1 = 1 [(pubg.venus.field) = {component:Inference}];
 
   // Component: Input
-  string value2 = 2 [(pubg.vlossom.field) = {
+  string value2 = 2 [(pubg.venus.field) = {
     component:Input,
     input: {
       min: 1,
@@ -23,7 +23,7 @@ message Values {
   }];
 
   // Component: Select Simple
-  string value3 = 3 [(pubg.vlossom.field) = {
+  string value3 = 3 [(pubg.venus.field) = {
     component:Select,
     select: {
       options: {
@@ -34,7 +34,7 @@ message Values {
   }];
 
   // Component: Select Labeled
-  string value4 = 4 [(pubg.vlossom.field) = {
+  string value4 = 4 [(pubg.venus.field) = {
     component:Select,
     select: {
       options: {
@@ -45,7 +45,7 @@ message Values {
   }];
 
   // Component: RadioSet Simple
-  string value5 = 5 [(pubg.vlossom.field) = {
+  string value5 = 5 [(pubg.venus.field) = {
     component:RadioSet,
     radio_set: {
       options: {
@@ -56,7 +56,7 @@ message Values {
   }];
 
   // Component: RadioSet Labeled
-  string value6 = 6 [(pubg.vlossom.field) = {
+  string value6 = 6 [(pubg.venus.field) = {
     component:RadioSet,
     radio_set: {
       options: {
@@ -67,22 +67,22 @@ message Values {
   }];
 
   // Component: DataRangePicker
-  string value7 = 7 [(pubg.vlossom.field) = {
+  string value7 = 7 [(pubg.venus.field) = {
     component:DateRangePicker,
   }];
 
   // Component: DataTimePicker
-  string value8 = 8 [(pubg.vlossom.field) = {
+  string value8 = 8 [(pubg.venus.field) = {
     component:DateTimePicker,
   }];
 
   // Component: MultiString Default Options
-  string value9 = 9 [(pubg.vlossom.field) = {
+  string value9 = 9 [(pubg.venus.field) = {
     component:MultiString,
   }];
 
   // Component: MultiString Many Options
-  string value10 = 10 [(pubg.vlossom.field) = {
+  string value10 = 10 [(pubg.venus.field) = {
     component:MultiString,
     multi_string: {
       copy: true,
@@ -92,7 +92,7 @@ message Values {
   }];
 
   // Component: TextArea
-  string value11 = 11 [(pubg.vlossom.field) = {
+  string value11 = 11 [(pubg.venus.field) = {
     component:TextArea,
     text_area: {
       max: 1000,
@@ -101,7 +101,7 @@ message Values {
   }];
 
   // Component: JsonEditor
-  string value12 = 12 [(pubg.vlossom.field) = {
+  string value12 = 12 [(pubg.venus.field) = {
     component:JsonEditor,
     json_editor: {
       height: 1000,

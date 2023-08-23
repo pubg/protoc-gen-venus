@@ -3,18 +3,18 @@ package generator
 import (
 	"fmt"
 
-	"github.com/pubg/protoc-gen-vlossom/generator/protooptions"
-	"github.com/pubg/protoc-gen-vlossom/generator/vlossom"
+	"github.com/pubg/protoc-gen-venus/generator/protoptions"
+	"github.com/pubg/protoc-gen-venus/generator/venus"
 )
 
-func buildFromInputOptions(option *protooptions.InputOptions, defaultType string, base vlossom.BaseComponentOptions) vlossom.Component {
-	component := vlossom.NewInput(base)
+func buildFromInputOptions(option *protoptions.InputOptions, defaultType string, base venus.BaseComponentOptions) venus.Component {
+	component := venus.NewInput(base)
 	component.Type = defaultType
 	if option == nil {
 		return component
 	}
 
-	if option.GetType() != protooptions.InputOptions_inference {
+	if option.GetType() != protoptions.InputOptions_inference {
 		component.Type = option.GetType().String()
 	}
 	if option.Min != nil {
@@ -26,8 +26,8 @@ func buildFromInputOptions(option *protooptions.InputOptions, defaultType string
 	return component
 }
 
-func buildFromMultiStringOptions(option *protooptions.MultiStringOptions, base vlossom.BaseComponentOptions) vlossom.Component {
-	component := vlossom.NewMultiString(base)
+func buildFromMultiStringOptions(option *protoptions.MultiStringOptions, base venus.BaseComponentOptions) venus.Component {
+	component := venus.NewMultiString(base)
 	if option == nil {
 		return component
 	}
@@ -42,8 +42,8 @@ func buildFromMultiStringOptions(option *protooptions.MultiStringOptions, base v
 	return component
 }
 
-func buildFromSelectOptions(option *protooptions.SelectOptions, selectOptions *vlossom.VlossomOptions, base vlossom.BaseComponentOptions) vlossom.Component {
-	component := vlossom.NewSelect(base, selectOptions)
+func buildFromSelectOptions(option *protoptions.SelectOptions, selectOptions *venus.VenusOptions, base venus.BaseComponentOptions) venus.Component {
+	component := venus.NewSelect(base, selectOptions)
 	if option == nil {
 		return component
 	}
@@ -59,8 +59,8 @@ func buildFromSelectOptions(option *protooptions.SelectOptions, selectOptions *v
 	return component
 }
 
-func buildFromCheckboxSetOptions(option *protooptions.CheckboxSetOptions, selectOptions *vlossom.VlossomOptions, base vlossom.BaseComponentOptions) vlossom.Component {
-	component := vlossom.NewCheckboxSet(base, selectOptions)
+func buildFromCheckboxSetOptions(option *protoptions.CheckboxSetOptions, selectOptions *venus.VenusOptions, base venus.BaseComponentOptions) venus.Component {
+	component := venus.NewCheckboxSet(base, selectOptions)
 	if option == nil {
 		return component
 	}
@@ -69,8 +69,8 @@ func buildFromCheckboxSetOptions(option *protooptions.CheckboxSetOptions, select
 	return component
 }
 
-func buildFromTextAreaOptions(option *protooptions.TextAreaOptions, base vlossom.BaseComponentOptions) vlossom.Component {
-	component := vlossom.NewTextArea(base)
+func buildFromTextAreaOptions(option *protoptions.TextAreaOptions, base venus.BaseComponentOptions) venus.Component {
+	component := venus.NewTextArea(base)
 	if option == nil {
 		return component
 	}
@@ -84,8 +84,8 @@ func buildFromTextAreaOptions(option *protooptions.TextAreaOptions, base vlossom
 	return component
 }
 
-func buildFromJsonEditorOptions(option *protooptions.JsonEditorOptions, base vlossom.BaseComponentOptions) vlossom.Component {
-	component := vlossom.NewJsonEditor(base)
+func buildFromJsonEditorOptions(option *protoptions.JsonEditorOptions, base venus.BaseComponentOptions) venus.Component {
+	component := venus.NewJsonEditor(base)
 	if option == nil {
 		return component
 	}
@@ -96,8 +96,8 @@ func buildFromJsonEditorOptions(option *protooptions.JsonEditorOptions, base vlo
 	return component
 }
 
-func buildFromRadioOptions(option *protooptions.RadioOptions, base vlossom.BaseComponentOptions) vlossom.Component {
-	component := vlossom.NewRadio(base, "radio")
+func buildFromRadioOptions(option *protoptions.RadioOptions, base venus.BaseComponentOptions) venus.Component {
+	component := venus.NewRadio(base, "radio")
 	if option == nil {
 		return component
 	}
@@ -109,8 +109,8 @@ func buildFromRadioOptions(option *protooptions.RadioOptions, base vlossom.BaseC
 	return component
 }
 
-func buildFromRadioSetOptions(option *protooptions.RadioSetOptions, selectOptions *vlossom.VlossomOptions, base vlossom.BaseComponentOptions) vlossom.Component {
-	component := vlossom.NewRadioSet(base, selectOptions)
+func buildFromRadioSetOptions(option *protoptions.RadioSetOptions, selectOptions *venus.VenusOptions, base venus.BaseComponentOptions) venus.Component {
+	component := venus.NewRadioSet(base, selectOptions)
 	if option == nil {
 		return component
 	}
@@ -119,11 +119,11 @@ func buildFromRadioSetOptions(option *protooptions.RadioSetOptions, selectOption
 	return component
 }
 
-func convertToVlossomOptions(protoOptions *protooptions.VlossomOptions) *vlossom.VlossomOptions {
+func convertToVenusOptions(protoOptions *protoptions.VenusOptions) *venus.VenusOptions {
 	if protoOptions == nil {
 		return nil
 	}
-	vo := vlossom.NewVlossomOptions()
+	vo := venus.NewVenusOptions()
 	if protoOptions.GetLabeledOptions() != nil {
 		if protoOptions.GetOptionLabel() == "" {
 			vo.OptionLabel = "label"
@@ -135,19 +135,19 @@ func convertToVlossomOptions(protoOptions *protooptions.VlossomOptions) *vlossom
 		} else {
 			vo.OptionValue = protoOptions.GetOptionValue()
 		}
-		var vlossomOptions []vlossom.LabeledOption
+		var venusOptions []venus.LabeledOption
 		for _, labeledOption := range protoOptions.LabeledOptions {
-			vlossomLabeledOption := vlossom.LabeledOption{Label: labeledOption.GetLabel()}
-			if x, ok := labeledOption.GetValue().(*protooptions.VlossomOptions_LabeledOption_String_); ok {
-				vlossomLabeledOption.Value = x.String_
-			} else if x, ok := labeledOption.GetValue().(*protooptions.VlossomOptions_LabeledOption_Integer); ok {
-				vlossomLabeledOption.Value = x.Integer
-			} else if x, ok := labeledOption.GetValue().(*protooptions.VlossomOptions_LabeledOption_Float); ok {
-				vlossomLabeledOption.Value = x.Float
+			venusLabeledOption := venus.LabeledOption{Label: labeledOption.GetLabel()}
+			if x, ok := labeledOption.GetValue().(*protoptions.VenusOptions_LabeledOption_String_); ok {
+				venusLabeledOption.Value = x.String_
+			} else if x, ok := labeledOption.GetValue().(*protoptions.VenusOptions_LabeledOption_Integer); ok {
+				venusLabeledOption.Value = x.Integer
+			} else if x, ok := labeledOption.GetValue().(*protoptions.VenusOptions_LabeledOption_Float); ok {
+				venusLabeledOption.Value = x.Float
 			}
-			vlossomOptions = append(vlossomOptions, vlossomLabeledOption)
+			venusOptions = append(venusOptions, venusLabeledOption)
 		}
-		vo.SetLabeledOptions(vlossomOptions)
+		vo.SetLabeledOptions(venusOptions)
 	}
 	if protoOptions.GetSimpleOptions() != nil {
 		vo.SetSimpleOptions(protoOptions.GetSimpleOptions())

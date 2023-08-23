@@ -1,7 +1,7 @@
 name: "Expose Test: Nested Field Level Inherit"
 description: "Expose Nested Field Level Inherit"
 requestFile: "request.pb.bin"
-expectResultFile: "entry.vlossom.json"
+expectResultFile: "entry.venus.json"
 expectResultIsNull: false
 
 expectedBehavior: |

@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package pubg.vlossom;
-option go_package = "protoc-gen-vlossom/generator/protooptions";
+package pubg.venus;
+option go_package = "github.com/pubg/protoc-gen-venus/generator/protoptions";
 
 import "google/protobuf/descriptor.proto";
 
@@ -111,7 +111,7 @@ message MultiStringOptions {
 }
 
 message SelectOptions {
-  VlossomOptions options = 1;
+  VenusOptions options = 1;
   bool autocomplete = 2;
   bool multiple = 3;
   bool select_all = 4 [json_name = "select-all"];
@@ -121,7 +121,7 @@ message SelectOptions {
 }
 
 message CheckboxSetOptions {
-  VlossomOptions options = 1;
+  VenusOptions options = 1;
   bool column = 2;
 }
 
@@ -140,11 +140,11 @@ message RadioOptions {
 }
 
 message RadioSetOptions {
-  VlossomOptions options = 1;
+  VenusOptions options = 1;
   bool column = 2;
 }
 
-message VlossomOptions {
+message VenusOptions {
   repeated string simple_options = 1 [json_name = "options"];
   repeated LabeledOption labeled_options = 2 [json_name = "options"];
   optional string option_label = 3 [json_name = "option-label"];

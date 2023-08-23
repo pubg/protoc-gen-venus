@@ -38,4 +38,4 @@
 ## 추후 과제
 - [ ] 2차원 Location Override
 - [x] Property Override
-- [x] protobuf package name change to [pubg.vlossom]
+- [x] protobuf package name change to [pubg.venus]

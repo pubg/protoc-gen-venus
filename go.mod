@@ -1,4 +1,4 @@
-module github.com/pubg/protoc-gen-vlossom
+module github.com/pubg/protoc-gen-venus
 
 go 1.20
 

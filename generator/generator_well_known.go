@@ -3,22 +3,22 @@ package generator
 import (
 	"fmt"
 
-	"github.com/pubg/protoc-gen-vlossom/generator/protooptions"
-	"github.com/pubg/protoc-gen-vlossom/generator/vlossom"
+	"github.com/pubg/protoc-gen-venus/generator/protoptions"
+	"github.com/pubg/protoc-gen-venus/generator/venus"
 
 	"google.golang.org/protobuf/compiler/protogen"
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-func (g *VlossomGenerator) buildFromScalaWellKnownField(ctx *HierarchicalContext, field *protogen.Field) (vlossom.Component, error) {
+func (g *VenusGenerator) buildFromScalaWellKnownField(ctx *HierarchicalContext, field *protogen.Field) (venus.Component, error) {
 	fd := field.Desc
-	fo := protooptions.GetFieldOptions(fd)
+	fo := protoptions.GetFieldOptions(fd)
 
 	base := g.concreteBaseComponentOptions(ctx, fd, fo)
 
 	wellKnownKind := *ToWellKnownKind(fd)
-	var componentType protooptions.ComponentType
-	if fo.GetComponent() != protooptions.ComponentType_Inference {
+	var componentType protoptions.ComponentType
+	if fo.GetComponent() != protoptions.ComponentType_Inference {
 		componentType = fo.GetComponent()
 	} else {
 		componentType = wellKnownKind.defaultComponent
@@ -33,22 +33,22 @@ func (g *VlossomGenerator) buildFromScalaWellKnownField(ctx *HierarchicalContext
 	return nil, fmt.Errorf("unknown well-known kind")
 }
 
-func (g *VlossomGenerator) buildFromBooleanRepeated(field *protogen.Field, componentType protooptions.ComponentType, base vlossom.BaseComponentOptions) (vlossom.Component, error) {
-	fo := protooptions.GetFieldOptions(field.Desc)
+func (g *VenusGenerator) buildFromBooleanRepeated(field *protogen.Field, componentType protoptions.ComponentType, base venus.BaseComponentOptions) (venus.Component, error) {
+	fo := protoptions.GetFieldOptions(field.Desc)
 	switch componentType {
-	case protooptions.ComponentType_CheckboxSet:
+	case protoptions.ComponentType_CheckboxSet:
 		if fo.GetCheckboxSet() == nil {
 			return nil, fmt.Errorf("failed buildFromBooleanRepeated, select options is nil")
 		}
-		return buildFromCheckboxSetOptions(fo.GetCheckboxSet(), convertToVlossomOptions(fo.GetCheckboxSet().GetOptions()), base), nil
+		return buildFromCheckboxSetOptions(fo.GetCheckboxSet(), convertToVenusOptions(fo.GetCheckboxSet().GetOptions()), base), nil
 	}
 	return nil, fmt.Errorf("failed buildFromBooleanRepeated, unknown component type: %s", componentType)
 }
 
-func (g *VlossomGenerator) buildFromJsonField(field *protogen.Field, componentType protooptions.ComponentType, base vlossom.BaseComponentOptions) (vlossom.Component, error) {
-	fo := protooptions.GetFieldOptions(field.Desc)
+func (g *VenusGenerator) buildFromJsonField(field *protogen.Field, componentType protoptions.ComponentType, base venus.BaseComponentOptions) (venus.Component, error) {
+	fo := protoptions.GetFieldOptions(field.Desc)
 	switch componentType {
-	case protooptions.ComponentType_JsonEditor:
+	case protoptions.ComponentType_JsonEditor:
 		return buildFromJsonEditorOptions(fo.GetJsonEditor(), base), nil
 	}
 	return nil, fmt.Errorf("failed buildFromJsonField, unknown component type: %s", componentType)
@@ -56,17 +56,17 @@ func (g *VlossomGenerator) buildFromJsonField(field *protogen.Field, componentTy
 
 type WellKnownKind struct {
 	kind             string
-	defaultComponent protooptions.ComponentType
+	defaultComponent protoptions.ComponentType
 }
 
 var (
 	BooleanRepeatedKind = WellKnownKind{
 		kind:             "boolean-repeated",
-		defaultComponent: protooptions.ComponentType_CheckboxSet,
+		defaultComponent: protoptions.ComponentType_CheckboxSet,
 	}
 	JsonKind = WellKnownKind{
 		kind:             "map",
-		defaultComponent: protooptions.ComponentType_JsonEditor,
+		defaultComponent: protoptions.ComponentType_JsonEditor,
 	}
 )
 

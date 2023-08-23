@@ -1,7 +1,7 @@
 name: "Scala Test: Boolean"
 description: "Scala Boolean Test"
 requestFile: "request.pb.bin"
-expectResultFile: "entry.vlossom.json"
+expectResultFile: "entry.venus.json"
 expectResultIsNull: false
 
 expectedBehavior: |

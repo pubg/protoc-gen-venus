@@ -1,7 +1,7 @@
 name: "Base Component: State"
 description: "Test for State field"
 requestFile: "request.pb.bin"
-expectResultFile: "entry.vlossom.json"
+expectResultFile: "entry.venus.json"
 expectResultIsNull: false
 
 expectedBehavior: |

@@ -22,14 +22,14 @@ Integration Test를 위한 폴더
 ```dtd
 .
 ├── entry.proto: 테스트 케이스 입력 데이터
-├── entry.vlossom.json: 예상되는 출력 값
+├── entry.venus.json: 예상되는 출력 값
 └── request.pb.bin: protoc 의존성을 제거하기 위해 미리 dump해 둔 파일, 실제 테스트때 입력값으로 사용 
 ```
 
 ## 테스트 케이스 생성 방법
 1. `cases` 폴더에 원하는 이름으로 새로운 폴더를 생성한다.
 2. `hack/dump_test_cases.sh`를 실행한다. (workdir 위치는 상관없다)
-3. `cmd/protoc-gen-vlossom/main_test.go`의 TestCases에 새로운 테스트 케이스를 추가한다.
+3. `cmd/protoc-gen-venus/main_test.go`의 TestCases에 새로운 테스트 케이스를 추가한다.
 
 ## 테스트 실행하는 방법
 1. repository root에서 `go test ./...`를 실행한다.

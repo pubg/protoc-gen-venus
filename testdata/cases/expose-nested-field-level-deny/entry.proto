@@ -6,7 +6,7 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (pubg.vlossom.file) = {entrypointMessage: "Values"};
+option (pubg.venus.file) = {entrypointMessage: "Values"};
 
 message Values {
   int32 value1 = 1;
@@ -14,12 +14,12 @@ message Values {
   bool value3 = 3;
   float value4 = 4;
   double value5 = 5;
-  Values2 value6 = 6 [(pubg.vlossom.field) = {expose: true}];
+  Values2 value6 = 6 [(pubg.venus.field) = {expose: true}];
 }
 
 message Values2 {
-  int32 value1 = 1 [(pubg.vlossom.field) = {expose: true}];
-  string value2 = 2 [(pubg.vlossom.field) = {expose: false}];
+  int32 value1 = 1 [(pubg.venus.field) = {expose: true}];
+  string value2 = 2 [(pubg.venus.field) = {expose: false}];
   bool value3 = 3;
   float value4 = 4;
   double value5 = 5;

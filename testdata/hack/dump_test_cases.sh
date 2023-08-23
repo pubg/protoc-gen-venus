@@ -8,7 +8,7 @@ proto_dirs=$(ls ../cases)
 
 for proto_dir in $proto_dirs; do
   protoc \
-    --plugin=protoc-gen-vlossom=prodoc-gen-debug \
+    --plugin=protoc-gen-venus=prodoc-gen-debug \
     --debug_out=../cases/$proto_dir \
     --debug_opt=dump_binary=true \
     -I ../../proto \

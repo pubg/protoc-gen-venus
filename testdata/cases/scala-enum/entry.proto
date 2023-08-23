@@ -6,17 +6,17 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (pubg.vlossom.file) = {entrypointMessage: "Values",  expose: true};
+option (pubg.venus.file) = {entrypointMessage: "Values",  expose: true};
 
 message Values {
   Enum value = 1;
 }
 
 enum Enum {
-  UNKNOWN = 0 [(pubg.vlossom.enum_value) = {string: "unknown"}];
-  VALUE1 = 1  [(pubg.vlossom.enum_value) = {integer: 1}];
-  VALUE2 = 2 [(pubg.vlossom.enum_value) = {integer: 2}];
-  VALUE3 = 3 [(pubg.vlossom.enum_value) = {float: 3.5}];
+  UNKNOWN = 0 [(pubg.venus.enum_value) = {string: "unknown"}];
+  VALUE1 = 1  [(pubg.venus.enum_value) = {integer: 1}];
+  VALUE2 = 2 [(pubg.venus.enum_value) = {integer: 2}];
+  VALUE3 = 3 [(pubg.venus.enum_value) = {float: 3.5}];
   VALUE4 = 4;
   VALUE5 = 5;
   VALUE6 = 6;

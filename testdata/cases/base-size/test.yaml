@@ -1,7 +1,7 @@
 name: "Base Component: Size"
 description: "Test for grid or rem"
 requestFile: "request.pb.bin"
-expectResultFile: "entry.vlossom.json"
+expectResultFile: "entry.venus.json"
 expectResultIsNull: false
 
 expectedBehavior: |

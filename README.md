@@ -1,13 +1,13 @@
-# protoc-gen-vlossom
+# protoc-gen-venus
 
-Vlossom의 Dynamic Form을 만드는 proto plugin
+venus의 Dynamic Form을 만드는 proto plugin
 
 ## Getting Started
-1. protoc-gen-vlossom을 설치합니다.
+1. protoc-gen-venus을 설치합니다.
 ```shell
-go install github.com/pubg/protoc-gen-vlossom/cmd/protoc-gen-vlossom@latest
+go install github.com/pubg/protoc-gen-venus/cmd/protoc-gen-venus@latest
 ```
-또는 [여기](https://github.com/pubg/protoc-gen-vlossom/releases)에서 다운로드 받아 사용합니다.
+또는 [여기](https://github.com/pubg/protoc-gen-venus/releases)에서 다운로드 받아 사용합니다.
 2. proto/options.proto를 Workdir에 복사합니다. 
 3. 아래 내용대로 example.proto 파일을 생성합니다. 
 ```
@@ -16,10 +16,10 @@ package schema;
 import "options.proto";
 
 option go_package = "github.com/sample";
-option (pubg.vlossom.file) = {expose: true, entrypointMessage: "Values"};
+option (pubg.venus.file) = {expose: true, entrypointMessage: "Values"};
 
 message Values {
-  string sample_input = 1 [(pubg.vlossom.field) = {component: Input, input: {type: text, max: 10}}];
+  string sample_input = 1 [(pubg.venus.field) = {component: Input, input: {type: text, max: 10}}];
   MyEnum my_enum = 2;
 }
 
@@ -33,7 +33,7 @@ enum MyEnum {
 4. 다음 명령어를 실행합니다.
 ```shell
 protoc \
-  --vlossom_out=./ \
+  --venus_out=./ \
   -I ./ \
   ./example.proto
 ```

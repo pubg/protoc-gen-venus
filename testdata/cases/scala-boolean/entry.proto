@@ -6,22 +6,22 @@ import "options.proto";
 
 option go_package = "github.com/sample";
 
-option (pubg.vlossom.file) = {entrypointMessage: "Values", expose: true};
+option (pubg.venus.file) = {entrypointMessage: "Values", expose: true};
 
 message Values {
   // 옵션 없음, default는 checkbox
   bool value1 = 1;
 
   // checkbox
-  bool value2 = 2 [(pubg.vlossom.field) = {component: Checkbox}];
+  bool value2 = 2 [(pubg.venus.field) = {component: Checkbox}];
 
   // switch
-  bool value3 = 3 [(pubg.vlossom.field) = {component: Switch}];
+  bool value3 = 3 [(pubg.venus.field) = {component: Switch}];
 
   // mandantory inference -> checkbox가 나와야 함
-  bool value4 = 4 [(pubg.vlossom.field) = {component: Inference}];
+  bool value4 = 4 [(pubg.venus.field) = {component: Inference}];
 
   // mandantory optional
   // boolean은 항상 optional이어야 한다. required면 true만 허용함..
-  optional bool value5 = 5 [(pubg.vlossom.field) = {component: Checkbox}];
+  optional bool value5 = 5 [(pubg.venus.field) = {component: Checkbox}];
 }

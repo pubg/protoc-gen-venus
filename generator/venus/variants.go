@@ -1,4 +1,4 @@
-package vlossom
+package venus
 
 import "encoding/json"
 
@@ -45,8 +45,8 @@ func NewMultiString(base BaseComponentOptions) *MultiString {
 }
 
 type Select struct {
-	BaseComponent   `json:",inline"`
-	*VlossomOptions `json:",inline"`
+	BaseComponent `json:",inline"`
+	*VenusOptions `json:",inline"`
 	// Apply autocomplete
 	Autocomplete bool `json:"autocomplete"`
 	// Can choose multiple options
@@ -61,8 +61,8 @@ type Select struct {
 	InfiniteLoad *int `json:"infinite-load,omitempty"`
 }
 
-func NewSelect(base BaseComponentOptions, options *VlossomOptions) *Select {
-	return &Select{BaseComponent: NewBaseComponent("vn-select", base), VlossomOptions: options}
+func NewSelect(base BaseComponentOptions, options *VenusOptions) *Select {
+	return &Select{BaseComponent: NewBaseComponent("vn-select", base), VenusOptions: options}
 }
 
 type Checkbox struct {
@@ -75,13 +75,13 @@ func NewCheckbox(base BaseComponentOptions) *Checkbox {
 }
 
 type CheckboxSet struct {
-	BaseComponent   `json:",inline"`
-	*VlossomOptions `json:",inline"`
-	Column          bool `json:"column"`
+	BaseComponent `json:",inline"`
+	*VenusOptions `json:",inline"`
+	Column        bool `json:"column"`
 }
 
-func NewCheckboxSet(base BaseComponentOptions, options *VlossomOptions) *CheckboxSet {
-	return &CheckboxSet{BaseComponent: NewBaseComponent("vn-checkbox-set", base), VlossomOptions: options}
+func NewCheckboxSet(base BaseComponentOptions, options *VenusOptions) *CheckboxSet {
+	return &CheckboxSet{BaseComponent: NewBaseComponent("vn-checkbox-set", base), VenusOptions: options}
 }
 
 type Switch struct {
@@ -143,11 +143,11 @@ func NewRadio(base BaseComponentOptions, name string) *Radio {
 }
 
 type RadioSet struct {
-	BaseComponent   `json:",inline"`
-	*VlossomOptions `json:",inline"`
-	Column          bool `json:"column"`
+	BaseComponent `json:",inline"`
+	*VenusOptions `json:",inline"`
+	Column        bool `json:"column"`
 }
 
-func NewRadioSet(base BaseComponentOptions, options *VlossomOptions) *RadioSet {
-	return &RadioSet{BaseComponent: NewBaseComponent("vn-radio-set", base), VlossomOptions: options}
+func NewRadioSet(base BaseComponentOptions, options *VenusOptions) *RadioSet {
+	return &RadioSet{BaseComponent: NewBaseComponent("vn-radio-set", base), VenusOptions: options}
 }

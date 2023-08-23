@@ -1,4 +1,4 @@
-package vlossom
+package venus
 
 type Component interface {
 	_Component()
@@ -88,35 +88,35 @@ type Message struct {
 	Text  string `json:"text"`
 }
 
-type VlossomOptionsOptions interface {
-	_VlossomOptionsOptions()
+type VenusOptionsOptions interface {
+	_VenusOptionsOptions()
 }
 
 type SimpleOptions []string
 
-func (o SimpleOptions) _VlossomOptionsOptions() {}
+func (o SimpleOptions) _VenusOptionsOptions() {}
 
 type LabeledOptions []LabeledOption
 
-func (o LabeledOptions) _VlossomOptionsOptions() {}
+func (o LabeledOptions) _VenusOptionsOptions() {}
 
-type VlossomOptions struct {
-	Options     VlossomOptionsOptions `json:"options,omitempty"`
-	OptionLabel string                `json:"option-label,omitempty"`
-	OptionValue string                `json:"option-value,omitempty"`
+type VenusOptions struct {
+	Options     VenusOptionsOptions `json:"options,omitempty"`
+	OptionLabel string              `json:"option-label,omitempty"`
+	OptionValue string              `json:"option-value,omitempty"`
 }
 
-func NewVlossomOptions() *VlossomOptions {
-	return &VlossomOptions{}
+func NewVenusOptions() *VenusOptions {
+	return &VenusOptions{}
 }
 
-func (o *VlossomOptions) SetLabeledOptions(options LabeledOptions) {
+func (o *VenusOptions) SetLabeledOptions(options LabeledOptions) {
 	o.Options = options
 	o.OptionValue = "value"
 	o.OptionLabel = "label"
 }
 
-func (o *VlossomOptions) SetSimpleOptions(options SimpleOptions) {
+func (o *VenusOptions) SetSimpleOptions(options SimpleOptions) {
 	o.Options = options
 	o.OptionValue = ""
 	o.OptionLabel = ""
