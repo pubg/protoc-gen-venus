@@ -27,5 +27,9 @@ message Values {
   string value9 = 9 [(pubg.venus.field) = {grid: {order: 8}}];
 
   // Grid defined and all options provided
-  int32 value10 = 10 [(pubg.venus.field) = {grid: {lg: 2, sm: 3, md: 4, lg_offset: 5, sm_offset: 6, md_offset: 7, order: 8}}];
+  int32 value10 = 10 [(pubg.venus.field) = {grid: {
+    lg: 2, sm: 3, md: 4,
+    lg_offset: 5, sm_offset: 6, md_offset: 7,
+    order: 8
+  }}];
 }

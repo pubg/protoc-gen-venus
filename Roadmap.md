@@ -33,6 +33,7 @@
 - [ ] k8s.io.api.pkg.core.v1.Volume
 - [x] map
 - [x] boolean-repeated
+- [ ] string repeated (aka. multi string)
 - https://protobuf.dev/reference/protobuf/google.protobuf/
 
 ## 추후 과제
