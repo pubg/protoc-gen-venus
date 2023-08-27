@@ -1,0 +1,41 @@
+[
+  [
+    {
+      "component": "vn-multi-string",
+      "propertyName": "value1",
+      "label": "value1",
+      "placeholder": "value1",
+      "required": true,
+      "delimeter": "",
+      "max": null,
+      "no-chips": true,
+      "copy": true
+    }
+  ],
+  [
+    {
+      "component": "vn-multi-string",
+      "propertyName": "value2",
+      "label": "value2",
+      "placeholder": "value2",
+      "required": true,
+      "delimeter": ":",
+      "max": 10,
+      "no-chips": true,
+      "copy": true
+    }
+  ],
+  [
+    {
+      "component": "vn-multi-string",
+      "propertyName": "value3",
+      "label": "value3",
+      "placeholder": "value3",
+      "required": true,
+      "delimeter": "",
+      "max": null,
+      "no-chips": true,
+      "copy": true
+    }
+  ]
+]

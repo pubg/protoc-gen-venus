@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package tests;
+
+import "options.proto";
+
+option go_package = "github.com/sample";
+
+option (pubg.venus.file) = {entrypointMessage: "Values", expose: true};
+
+message Values {
+  // 최소 옵션
+  repeated string value1 = 1;
+
+  // 최대 옵션
+  repeated string value2 = 2 [(pubg.venus.field) = {component: MultiString, multi_string: {
+    max: 10,
+    noChips: true,
+    copy: true,
+    delimeter: ":",
+  }}];
+
+  // inference component
+  repeated string value3 = 3 [(pubg.venus.field) = {component: Inference}];
+}

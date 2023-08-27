@@ -125,7 +125,6 @@ func (g *VenusGenerator) buildFromField(ctx *HierarchicalContext, field *protoge
 	// Repeated Types
 	// TODO: Tool Part랑 어떻게 repeated 구현할지 논의해야 함
 	_ = fd.Cardinality() == protoreflect.Repeated
-
 	// Nested Types
 	if fd.Kind() == protoreflect.GroupKind {
 		return g.buildFromMessage(ctx, field.Message)

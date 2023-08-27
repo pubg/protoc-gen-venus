@@ -1,0 +1,9 @@
+name: "WellKnown Test: String Repeated"
+description: "WellKnown String Repeated Test"
+requestFile: "request.pb.bin"
+expectResultFile: "entry.venus.json"
+expectResultIsNull: false
+
+expectedBehavior: |
+  Test all string repeated field options
+
