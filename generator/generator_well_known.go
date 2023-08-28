@@ -112,6 +112,9 @@ func ToWellKnownKind(fd protoreflect.FieldDescriptor) *WellKnownKind {
 			return &TimestampKind
 		case "google.protobuf.Duration":
 		case "k8s.io.apimachinery.pkg.apis.util.v1.IntOrString":
+			// oneof int or string?
+			// input with int or string validation?
+			// k8s에서 int or string이 어떤 용례로 쓰이는지 찾아봐야 할듯
 		case "k8s.io.api.pkg.core.v1.Volume":
 		}
 	}

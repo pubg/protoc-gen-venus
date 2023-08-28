@@ -6,6 +6,9 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
+// HierarchicalContext is a context for hierarchical and inheritable fields.
+// It is used to determine whether a field should be exposed or not and to build a hierarchical property name.
+// Or you can add additional inheritable properties.
 type HierarchicalContext struct {
 	exposes    []bool
 	properties []string
