@@ -3,12 +3,12 @@ before:
     - go mod tidy
 builds:
   - id: protoc-gen-venus
-    main: cmd/protoc-gen-venus/main.go
+    main: main.go
     binary: protoc-gen-venus
     env:
       - CGO_ENABLED=0
     ldflags:
-      - -s
+      - -s -X main.version={{ .Version }}
     goos:
       - linux
       - darwin

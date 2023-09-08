@@ -26,3 +26,4 @@ examples/example.venus.json
 **/code_generator_request.pb.bin
 **/request.pb.bin
 **/request.pb.json
+dist/
