@@ -6,7 +6,7 @@ proto_dir=$1
 
 cd $(dirname $0)
 
-go build -o protoc-gen-venus ../../cmd/protoc-gen-venus/main.go
+go build -o protoc-gen-venus ../../main.go
 
 protoc \
   --plugin=protoc-gen-venus=./protoc-gen-venus \

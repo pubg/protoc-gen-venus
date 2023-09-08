@@ -1,15 +1,15 @@
 syntax = "proto3";
 
 package pubg.venus;
-option go_package = "github.com/pubg/protoc-gen-venus/generator/protoptions";
+option go_package = "github.com/pubg/protoc-gen-venus2/pkg/protoptions";
 
 import "google/protobuf/descriptor.proto";
 
 // Not extendable, just define structure
 message PluginOptions {
   optional bool expose_all = 1;
-  optional string output_file_suffix = 2;
-  optional bool pretty_output = 3;
+  string output_file_suffix = 2;
+  bool pretty_output = 3;
 }
 
 message FileOptions {
@@ -49,6 +49,7 @@ message FieldOptions {
     JsonEditorOptions json_editor = 26;
     RadioOptions radio = 27;
     RadioSetOptions radio_set = 28;
+    ArrayOptions array = 29;
   }
 }
 
@@ -101,6 +102,7 @@ message InputOptions {
   Type type = 1;
   optional int32 min = 2;
   optional int32 max = 3;
+  string regex = 4;
 }
 
 message MultiStringOptions {
@@ -128,6 +130,7 @@ message CheckboxSetOptions {
 message TextAreaOptions {
   optional int32 min = 1;
   optional int32 max = 2;
+  string regex = 3;
 }
 
 message JsonEditorOptions {
@@ -144,11 +147,14 @@ message RadioSetOptions {
   bool column = 2;
 }
 
+message ArrayOptions {
+  optional int32 min = 1;
+  optional int32 max = 2;
+}
+
 message VenusOptions {
-  repeated string simple_options = 1 [json_name = "options"];
-  repeated LabeledOption labeled_options = 2 [json_name = "options"];
-  optional string option_label = 3 [json_name = "option-label"];
-  optional string option_value = 4 [json_name = "option-value"];
+  repeated string simple_options = 1;
+  repeated LabeledOption labeled_options = 2;
 
   message LabeledOption {
     string label = 1;
@@ -172,16 +178,23 @@ message EnumValueOptions {
   }
 }
 
+message OneOfOptions {
+  optional bool expose = 1;
+  string property = 2;
+  string label = 3;
+}
+
 extend google.protobuf.FileOptions {
   FileOptions file = 11241;
 }
 
-extend google.protobuf.FieldOptions {
-  FieldOptions field = 11242;
+extend google.protobuf.MessageOptions {
+  MessageOptions message = 11242;
 }
 
-extend google.protobuf.MessageOptions {
-  MessageOptions message = 11243;
+
+extend google.protobuf.FieldOptions {
+  FieldOptions field = 11243;
 }
 
 extend google.protobuf.EnumOptions {
@@ -190,4 +203,8 @@ extend google.protobuf.EnumOptions {
 
 extend google.protobuf.EnumValueOptions {
   EnumValueOptions enum_value = 11245;
+}
+
+extend google.protobuf.OneofOptions {
+  OneOfOptions one_of = 11246;
 }

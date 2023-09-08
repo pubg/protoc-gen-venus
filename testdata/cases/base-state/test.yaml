@@ -1,10 +1,10 @@
 name: "Base Component: State"
 description: "Test for State field"
-requestFile: "request.pb.bin"
-expectResultFile: "entry.venus.json"
+inputFiles: ["entry.proto"]
+expectResultFiles: ["entry.venus.json"]
 expectResultIsNull: false
 
-expectedBehavior: |
+expectedBehaviorDescription: |
   if state not exist:
     do nothing
   

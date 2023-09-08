@@ -1,9 +1,9 @@
 name: "Scala Test: Enum"
 description: "Scala Enum Test"
-requestFile: "request.pb.bin"
-expectResultFile: "entry.venus.json"
+inputFiles: ["entry.proto"]
+expectResultFiles: ["entry.venus.json"]
 expectResultIsNull: false
 
-expectedBehavior: |
+expectedBehaviorDescription: |
   Test all Enum field options
 

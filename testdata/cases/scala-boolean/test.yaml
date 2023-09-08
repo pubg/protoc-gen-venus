@@ -1,9 +1,9 @@
 name: "Scala Test: Boolean"
 description: "Scala Boolean Test"
-requestFile: "request.pb.bin"
-expectResultFile: "entry.venus.json"
+inputFiles: ["entry.proto"]
+expectResultFiles: ["entry.venus.json"]
 expectResultIsNull: false
 
-expectedBehavior: |
+expectedBehaviorDescription: |
   Test all boolean field options
 

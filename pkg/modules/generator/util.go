@@ -3,9 +3,9 @@ package generator
 import (
 	"fmt"
 
-	"github.com/pubg/protoc-gen-venus/generator/protoptions"
-	"github.com/pubg/protoc-gen-venus/generator/venus"
-	"google.golang.org/protobuf/reflect/protoreflect"
+	pgs "github.com/lyft/protoc-gen-star/v2"
+	"github.com/pubg/protoc-gen-venus/pkg/protoptions"
+	"github.com/pubg/protoc-gen-venus/pkg/venus/component"
 )
 
 func intP(i *int32) *int {
@@ -17,21 +17,33 @@ func intP(i *int32) *int {
 	return &ii
 }
 
-func concreteBaseComponentOptions(ctx *HierarchicalContext, fd protoreflect.FieldDescriptor, fo *protoptions.FieldOptions) venus.BaseComponentOptions {
-	base := venus.BaseComponentOptions{}
-	base.PropertyName = ctx.PropertiesString()
-	base.Required = !fd.HasOptionalKeyword()
+func ConcreteBaseComponentOptionsFromOneOf(oneOf pgs.OneOf, oo *protoptions.OneOfOptions) component.BaseComponentOptions {
+	base := component.BaseComponentOptions{}
+	base.Required = true
+
+	// Fill Label
+	if oo.GetLabel() == "" {
+		base.Label = oneOf.Name().String()
+	} else {
+		base.Label = oo.GetLabel()
+	}
+	return base
+}
+
+func ConcreteBaseComponentOptions(field pgs.Field, fo *protoptions.FieldOptions) component.BaseComponentOptions {
+	base := component.BaseComponentOptions{}
+	base.Required = !field.HasOptionalKeyword()
 
 	// Fill Label
 	if fo.GetLabel() == "" {
-		base.Label = fd.TextName()
+		base.Label = field.Name().String()
 	} else {
 		base.Label = fo.GetLabel()
 	}
 
 	// Fille Placeholder
 	if fo.GetPlaceholder() == "" {
-		base.Placeholder = fd.TextName()
+		base.Placeholder = field.Name().String()
 	} else {
 		base.Placeholder = fo.GetPlaceholder()
 	}
@@ -43,7 +55,7 @@ func concreteBaseComponentOptions(ctx *HierarchicalContext, fd protoreflect.Fiel
 
 	// Fill Messages
 	for _, message := range fo.GetMessages() {
-		vMessage := venus.Message{}
+		vMessage := component.Message{}
 		vMessage.Text = message.GetText()
 		if message.GetState() != protoptions.State_unspecified {
 			vMessage.State = message.GetState().String()
@@ -55,7 +67,7 @@ func concreteBaseComponentOptions(ctx *HierarchicalContext, fd protoreflect.Fiel
 	switch size := fo.GetSize().(type) {
 	case *protoptions.FieldOptions_Grid:
 		grid := size.Grid
-		base.Grid = &venus.Grid{
+		base.Grid = &component.Grid{
 			Sm:       intP(grid.Md),
 			Md:       intP(grid.Md),
 			Lg:       intP(grid.Lg),

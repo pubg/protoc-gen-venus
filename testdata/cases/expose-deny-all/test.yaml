@@ -1,10 +1,10 @@
 name: "Expose Test: Deny All"
 description: "Expose Deny All Fields"
-requestFile: "request.pb.bin"
-expectResultFile: ""
+inputFiles: ["entry.proto"]
+expectResultFiles: ["entry.venus.json"]
 expectResultIsNull: true
 
-expectedBehavior: |
+expectedBehaviorDescription: |
   Expose Deny All Fields
   
   Result should be not exist

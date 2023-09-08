@@ -1,9 +1,9 @@
 name: "Expose Test: Field Level Inherit"
 description: "Expose Field Level Inherit"
-requestFile: "request.pb.bin"
-expectResultFile: "entry.venus.json"
+inputFiles: ["entry.proto"]
+expectResultFiles: ["entry.venus.json"]
 expectResultIsNull: false
 
-expectedBehavior: |
+expectedBehaviorDescription: |
   Expose options should inherit from file level
 

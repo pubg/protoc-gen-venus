@@ -1,10 +1,10 @@
 name: "Base Component: Size"
 description: "Test for grid or rem"
-requestFile: "request.pb.bin"
-expectResultFile: "entry.venus.json"
+inputFiles: ["entry.proto"]
+expectResultFiles: ["entry.venus.json"]
 expectResultIsNull: false
 
-expectedBehavior: |
+expectedBehaviorDescription: |
   if grid exists:
     if grid is partially provided:
       set grid to provided

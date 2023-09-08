@@ -4,7 +4,7 @@ set -eux
 
 cd $(dirname $0)
 
-go build -o protoc-gen-venus ../../cmd/protoc-gen-venus/main.go
+go build -o protoc-gen-venus ../../main.go
 
 proto_dirs=$(ls ../cases)
 

@@ -1,8 +1,5 @@
 # Roadmap
 
-## Protobuf AST
-![ast](./ast.png)
-
 ## Message Features
 - [ ] oneof: 어떻게?
 - [x] map: Json Editor?
@@ -35,6 +32,12 @@
 - [x] boolean-repeated
 - [ ] string repeated (aka. multi string)
 - https://protobuf.dev/reference/protobuf/google.protobuf/
+
+## Testcase
+- [ ] plugin fatal test
+- [ ] multiple target file test
+- [ ] Multiple file but single target file
+- [x] proto syntax2 test
 
 ## 추후 과제
 - [ ] 2차원 Location Override

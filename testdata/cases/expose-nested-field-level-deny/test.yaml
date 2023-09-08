@@ -1,10 +1,10 @@
 name: "Expose Test: Nested Field Level Inherit"
 description: "Expose Nested Field Level Inherit"
-requestFile: "request.pb.bin"
-expectResultFile: "entry.venus.json"
+inputFiles: ["entry.proto"]
+expectResultFiles: ["entry.venus.json"]
 expectResultIsNull: false
 
-expectedBehavior: |
+expectedBehaviorDescription: |
   Some Nested messages are denied to expose
   
   Those filed or message are not exist in result

@@ -1,9 +1,9 @@
 name: "Scala Test: Number"
 description: "Scala Number Test"
-requestFile: "request.pb.bin"
-expectResultFile: "entry.venus.json"
+inputFiles: ["entry.proto"]
+expectResultFiles: ["entry.venus.json"]
 expectResultIsNull: false
 
-expectedBehavior: |
+expectedBehaviorDescription: |
   Test all Number field options
 

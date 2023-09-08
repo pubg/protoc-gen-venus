@@ -18,7 +18,8 @@
       "required": true,
       "type": "text",
       "min": 1,
-      "max": 10
+      "max": 10,
+      "regex": "^[a-zA-Z0-9]*$"
     }
   ],
   [
@@ -153,7 +154,8 @@
       "placeholder": "value11",
       "required": true,
       "min": 0,
-      "max": 1000
+      "max": 1000,
+      "regex": "^[a-zA-Z0-9]*$"
     }
   ],
   [

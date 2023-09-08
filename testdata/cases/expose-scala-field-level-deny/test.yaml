@@ -1,10 +1,10 @@
 name: "Expose Test: Scala Field Level Deny"
 description: "Expose Scala Field Level Deny"
-requestFile: "request.pb.bin"
-expectResultFile: "entry.venus.json"
+inputFiles: ["entry.proto"]
+expectResultFiles: ["entry.venus.json"]
 expectResultIsNull: false
 
-expectedBehavior: |
+expectedBehaviorDescription: |
   Some Scala field are denied to expose
   
   Those filed are not exist in result

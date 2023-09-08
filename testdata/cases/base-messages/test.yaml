@@ -1,10 +1,10 @@
 name: "Base Component: Messages"
 description: "Test for Messages"
-requestFile: "request.pb.bin"
-expectResultFile: "entry.venus.json"
+inputFiles: ["entry.proto"]
+expectResultFiles: ["entry.venus.json"]
 expectResultIsNull: false
 
-expectedBehavior: |
+expectedBehaviorDescription: |
   set messages to provided
   
   if messages are repeated:

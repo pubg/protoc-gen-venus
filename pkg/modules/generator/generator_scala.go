@@ -3,35 +3,32 @@ package generator
 import (
 	"fmt"
 
-	"github.com/pubg/protoc-gen-venus/generator/protoptions"
-	"github.com/pubg/protoc-gen-venus/generator/venus"
-	"google.golang.org/protobuf/compiler/protogen"
-	"google.golang.org/protobuf/reflect/protoreflect"
+	pgs "github.com/lyft/protoc-gen-star/v2"
+	"github.com/pubg/protoc-gen-venus/pkg/protoptions"
+	"github.com/pubg/protoc-gen-venus/pkg/venus/component"
 )
 
-func (g *VenusGenerator) buildFromScalaField(ctx *HierarchicalContext, field *protogen.Field) (venus.Component, error) {
-	fd := field.Desc
-	fo := protoptions.GetFieldOptions(fd)
+func BuildFromScalaField(field pgs.Field) (component.Component, error) {
+	fo := protoptions.GetFieldOptions(field)
 
-	base := concreteBaseComponentOptions(ctx, fd, fo)
-	scalaKind := ToScalaKind(fd)
+	base := ConcreteBaseComponentOptions(field, fo)
+	scalaKind := *ToScalaKind(field)
 	componentType := getDesiredOrDefaultComponent(fo.GetComponent(), scalaKind.defaultComponent)
 
 	switch scalaKind {
 	case NumberKind:
-		return g.buildFromNumberField(field, componentType, base)
+		return buildFromNumberField(field, componentType, base, fo)
 	case StringKind:
-		return g.buildFromStringField(field, componentType, base)
+		return buildFromStringField(field, componentType, base, fo)
 	case EnumKind:
-		return g.buildFromEnumField(field, componentType, base)
+		return buildFromEnumField(field, componentType, base, fo)
 	case BooleanKind:
-		return g.buildFromBooleanField(field, componentType, base)
+		return buildFromBooleanField(field, componentType, base, fo)
 	}
 	return nil, fmt.Errorf("unknown scala kind")
 }
 
-func (g *VenusGenerator) buildFromNumberField(field *protogen.Field, componentType protoptions.ComponentType, base venus.BaseComponentOptions) (venus.Component, error) {
-	fo := protoptions.GetFieldOptions(field.Desc)
+func buildFromNumberField(field pgs.Field, componentType protoptions.ComponentType, base component.BaseComponentOptions, fo *protoptions.FieldOptions) (component.Component, error) {
 	switch componentType {
 	case protoptions.ComponentType_Input:
 		return buildFromInputOptions(fo.GetInput(), protoptions.InputOptions_number.String(), base), nil
@@ -39,8 +36,7 @@ func (g *VenusGenerator) buildFromNumberField(field *protogen.Field, componentTy
 	return nil, fmt.Errorf("failed buildFromNumberField, unknown component type: %s", componentType)
 }
 
-func (g *VenusGenerator) buildFromStringField(field *protogen.Field, componentType protoptions.ComponentType, base venus.BaseComponentOptions) (venus.Component, error) {
-	fo := protoptions.GetFieldOptions(field.Desc)
+func buildFromStringField(field pgs.Field, componentType protoptions.ComponentType, base component.BaseComponentOptions, fo *protoptions.FieldOptions) (component.Component, error) {
 	switch componentType {
 	case protoptions.ComponentType_Input:
 		return buildFromInputOptions(fo.GetInput(), protoptions.InputOptions_text.String(), base), nil
@@ -55,9 +51,9 @@ func (g *VenusGenerator) buildFromStringField(field *protogen.Field, componentTy
 		}
 		return buildFromRadioSetOptions(fo.GetRadioSet(), convertToVenusOptions(fo.GetRadioSet().GetOptions()), base), nil
 	case protoptions.ComponentType_DateRangePicker:
-		return venus.NewDateRangePicker(base), nil
+		return component.NewDateRangePicker(base), nil
 	case protoptions.ComponentType_DateTimePicker:
-		return venus.NewDateTimePicker(base), nil
+		return component.NewDateTimePicker(base), nil
 	case protoptions.ComponentType_MultiString:
 		return buildFromMultiStringOptions(fo.GetMultiString(), base), nil
 	case protoptions.ComponentType_TextArea:
@@ -68,20 +64,18 @@ func (g *VenusGenerator) buildFromStringField(field *protogen.Field, componentTy
 	return nil, fmt.Errorf("failed buildFromStringField, unknown component type: %s", componentType)
 }
 
-func (g *VenusGenerator) buildFromEnumField(field *protogen.Field, componentType protoptions.ComponentType, base venus.BaseComponentOptions) (venus.Component, error) {
-	fd := field.Desc
-	fo := protoptions.GetFieldOptions(fd)
-	ed := fd.Enum()
-	_ = protoptions.GetEnumOptions(ed)
+func buildFromEnumField(field pgs.Field, componentType protoptions.ComponentType, base component.BaseComponentOptions, fo *protoptions.FieldOptions) (component.Component, error) {
+	ft := field.Type()
+	ed := ft.Enum()
 	values := ed.Values()
 
-	selectOptions := &venus.VenusOptions{}
-	var labeledOptions []venus.LabeledOption
-	for i := 0; i < values.Len(); i++ {
-		vd := values.Get(i)
+	selectOptions := &component.VenusOptions{}
+	var labeledOptions []component.LabeledOption
+	for i := 0; i < len(values); i++ {
+		vd := values[i]
 		vo := protoptions.GetEnumValueOptions(vd)
 
-		labeledOption := venus.LabeledOption{Label: string(vd.Name())}
+		labeledOption := component.LabeledOption{Label: string(vd.Name())}
 		if x, ok := vo.GetValue().(*protoptions.EnumValueOptions_String_); ok {
 			labeledOption.Value = x.String_
 		} else if x, ok := vo.GetValue().(*protoptions.EnumValueOptions_Integer); ok {
@@ -89,7 +83,7 @@ func (g *VenusGenerator) buildFromEnumField(field *protogen.Field, componentType
 		} else if x, ok := vo.GetValue().(*protoptions.EnumValueOptions_Float); ok {
 			labeledOption.Value = x.Float
 		} else {
-			labeledOption.Value = vd.Name()
+			labeledOption.Value = vd.Name().String()
 		}
 		labeledOptions = append(labeledOptions, labeledOption)
 	}
@@ -104,12 +98,12 @@ func (g *VenusGenerator) buildFromEnumField(field *protogen.Field, componentType
 	return nil, fmt.Errorf("failed buildFromEnumField, unknown component type: %s", componentType)
 }
 
-func (g *VenusGenerator) buildFromBooleanField(field *protogen.Field, componentType protoptions.ComponentType, base venus.BaseComponentOptions) (venus.Component, error) {
+func buildFromBooleanField(field pgs.Field, componentType protoptions.ComponentType, base component.BaseComponentOptions, fo *protoptions.FieldOptions) (component.Component, error) {
 	switch componentType {
 	case protoptions.ComponentType_Checkbox:
-		return venus.NewCheckbox(base), nil
+		return component.NewCheckbox(base), nil
 	case protoptions.ComponentType_Switch:
-		return venus.NewSwitch(base), nil
+		return component.NewSwitch(base), nil
 	}
 	return nil, fmt.Errorf("failed buildFromBooleanField, unknown component type: %s", componentType)
 }
@@ -138,32 +132,24 @@ var (
 	}
 )
 
-func ToScalaKind(fieldDescriptor protoreflect.FieldDescriptor) ScalaKind {
-	switch fieldDescriptor.Kind() {
-	case protoreflect.BoolKind:
-		return BooleanKind
-	case protoreflect.EnumKind:
-		return EnumKind
-	case protoreflect.Int32Kind,
-		protoreflect.Sint32Kind,
-		protoreflect.Uint32Kind,
-		protoreflect.Int64Kind,
-		protoreflect.Sint64Kind,
-		protoreflect.Uint64Kind,
-		protoreflect.Sfixed32Kind,
-		protoreflect.Fixed32Kind,
-		protoreflect.FloatKind,
-		protoreflect.Sfixed64Kind,
-		protoreflect.Fixed64Kind,
-		protoreflect.DoubleKind:
-		return NumberKind
-	case protoreflect.StringKind,
-		protoreflect.BytesKind:
-		return StringKind
-	case protoreflect.MessageKind:
-		panic("MessageKind is not supported")
-	case protoreflect.GroupKind:
-		panic("GroupKind is not supported")
+func IsScalaKind(field pgs.Field) bool {
+	return ToScalaKind(field) != nil
+}
+
+func ToScalaKind(field pgs.Field) *ScalaKind {
+	protoType := field.Type().ProtoType()
+	if protoType.IsNumeric() {
+		return &NumberKind
 	}
-	panic(fmt.Sprintf("%s is not supported", fieldDescriptor.FullName()))
+	if protoType == pgs.BoolT {
+		return &BooleanKind
+	}
+	if protoType == pgs.EnumT {
+		return &EnumKind
+	}
+	if protoType == pgs.StringT || protoType == pgs.BytesT {
+		return &StringKind
+	}
+	// may return null if type is map or group
+	return nil
 }

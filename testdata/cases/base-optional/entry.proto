@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package tests;
 
-import "options.proto";
+import "venus.proto";
 
 import "entry-proto2.proto";
 

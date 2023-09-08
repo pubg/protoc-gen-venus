@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package tests;
 
-import "options.proto";
+import "venus.proto";
 
 option go_package = "github.com/sample";
 

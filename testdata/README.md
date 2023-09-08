@@ -9,7 +9,7 @@ Integration Test를 위한 폴더
 ├── cases
 │   ├── basic
 │   ├── deny-all-expose
-│   ├── ... 테스트 케이스들
+│   ├── ... 테스트 케이스
 │   └── message-level-inherit-expose
 └── hack
     ├── dump_test_cases.sh: 테스트를 위한 protoc request를 dump하는 스크립트 
